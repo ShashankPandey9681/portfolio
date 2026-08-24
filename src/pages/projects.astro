@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects } from '../data/site';
+---
+
+<Base title="Projects" description="Selected product work and side projects.">
+  <section class="wrap section">
+    <p class="eyebrow">Logbook · Work</p>
+    <h1>Projects</h1>
+    <p class="prose lede">
+      A selection of things I've shipped and shaped. Each entry: what it was, my
+      role, and what changed because of it.
+    </p>
+
+    <div class="projects">
+      {
+        projects.map((p, i) => (
+          <article class="project">
+            <div class="project__index meta">{String(i + 1).padStart(2, '0')}</div>
+            <div class="project__main">
+              <p class="meta">{p.period}</p>
+              <h2 class="project__title">
+                {p.link ? <a href={p.link}>{p.title}</a> : p.title}
+              </h2>
+              <p class="project__sum">{p.summary}</p>
+              <ul class="project__tags">
+                {p.tags.map((t) => (
+                  <li class="meta project__tag">{t}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <style>
+    .lede {
+      margin-top: 1rem;
+      color: var(--ink-soft);
+    }
+    .projects {
+      margin-top: 2.5rem;
+    }
+    .project {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      padding-block: 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .project__index {
+      color: var(--accent);
+      padding-top: 0.3rem;
+    }
+    .project__title {
+      margin-top: 0.3rem;
+    }
+    .project__sum {
+      color: var(--ink-soft);
+      margin-top: 0.7rem;
+      max-width: 58ch;
+    }
+    .project__tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0;
+      margin-top: 1rem;
+    }
+    .project__tag {
+      border: 1px solid var(--line-strong);
+      padding: 0.25rem 0.55rem;
+      color: var(--ink-soft);
+    }
+    @media (max-width: 560px) {
+      .project {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</Base>

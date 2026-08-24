@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, work } from '../data/site';
+---
+
+<Base title="About" description={site.tagline}>
+  <section class="wrap section">
+    <p class="eyebrow">Logbook · About</p>
+    <h1>About</h1>
+
+    <div class="prose bio">
+      <p>
+        Hi — I'm {site.name}, a {site.role.toLowerCase()}. This is placeholder copy:
+        replace it in <code>src/pages/about.astro</code>. Write a few honest
+        paragraphs about what you work on, how you think about building things, and
+        what you're curious about right now.
+      </p>
+      <p>
+        I write about product management, AI, innovation, and productivity — and
+        also about life and men's mental health, because the person doing the work
+        matters as much as the work.
+      </p>
+    </div>
+
+    <hr class="divider timeline-rule" />
+
+    <h2 class="tl-heading">Where I've worked</h2>
+    <ol class="timeline">
+      {
+        work.map((role) => (
+          <li class="tl-item">
+            <p class="meta tl-period">{role.period}</p>
+            <div class="tl-body">
+              <h3 class="tl-title">
+                {role.title} · <span class="tl-org">{role.org}</span>
+              </h3>
+              <p class="tl-desc">{role.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <style>
+    .bio {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .timeline-rule {
+      margin-block: 2.5rem;
+    }
+    .tl-heading {
+      margin-bottom: 1.5rem;
+    }
+    .timeline {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 10rem 1fr;
+      gap: 1.2rem;
+      padding-block: 1.4rem;
+      border-top: 1px solid var(--line);
+    }
+    .tl-period {
+      padding-top: 0.3rem;
+    }
+    .tl-org {
+      color: var(--accent-ink);
+      font-family: var(--font-body);
+    }
+    .tl-desc {
+      color: var(--ink-soft);
+      margin-top: 0.4rem;
+    }
+    @media (max-width: 560px) {
+      .tl-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</Base>

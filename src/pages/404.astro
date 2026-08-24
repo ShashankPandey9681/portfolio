@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found" description="That page doesn't exist.">
+  <section class="wrap section center">
+    <p class="eyebrow">Error · 404</p>
+    <h1>Nothing filed here</h1>
+    <p class="prose lede">
+      This entry doesn't exist — it may have moved, or never did. Head back to the
+      start.
+    </p>
+    <div class="actions">
+      <a href="/" class="btn">Home</a>
+      <a href="/blog" class="btn btn--ghost">Blog</a>
+    </div>
+  </section>
+
+  <style>
+    .center {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .lede {
+      margin-top: 1rem;
+      color: var(--ink-soft);
+    }
+    .actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+  </style>
+</Base>

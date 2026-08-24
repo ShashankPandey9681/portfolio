@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Placeholder 02">
+  <rect width="1200" height="800" fill="#faf7f1"/>
+  <rect x="24" y="24" width="1152" height="752" fill="none" stroke="#2D6A9F" stroke-width="2"/>
+  <text x="60" y="140" font-family="Georgia, serif" font-size="120" fill="#2D6A9F" opacity="0.9">02</text>
+  <text x="62" y="720" font-family="monospace" font-size="30" letter-spacing="3" fill="#4a5a68">A TALK OR A MOMENT</text>
+  <text x="600" y="430" font-family="monospace" font-size="26" letter-spacing="2" fill="#8a9099" text-anchor="middle">REPLACE IN public/images/</text>
+</svg>

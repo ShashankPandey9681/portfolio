@@ -1,0 +1,160 @@
+---
+import '../styles/global.css';
+import { site, nav } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
+const pageDesc = description ?? site.tagline;
+const path = Astro.url.pathname;
+const canonical = Astro.site ? new URL(path, Astro.site).href : path;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="site-head">
+      <div class="wrap site-head__inner">
+        <a href="/" class="brand">
+          <span class="brand__mark">◆</span>
+          <span class="brand__name">{site.name}</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                class:list={['site-nav__link', { 'is-active': isActive(item.href) }]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <hr class="divider" />
+      <div class="wrap site-foot__inner">
+        <p class="meta">© {new Date().getFullYear()} {site.name}</p>
+        <p class="site-foot__links">
+          {site.socials.linkedin && <a href={site.socials.linkedin}>LinkedIn</a>}
+          {site.socials.x && <a href={site.socials.x}>X</a>}
+          {site.socials.github && <a href={site.socials.github}>GitHub</a>}
+          <a href="/contact">Get in touch</a>
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      .site-head {
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(8px);
+        z-index: 50;
+      }
+      .site-head__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .brand__mark {
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+      .brand__name {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      .site-nav {
+        display: flex;
+        gap: 1.1rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .site-nav__link {
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        text-decoration: none;
+        padding-bottom: 2px;
+        border-bottom: 1.5px solid transparent;
+      }
+      .site-nav__link:hover {
+        color: var(--ink);
+      }
+      .site-nav__link.is-active {
+        color: var(--ink);
+        border-bottom-color: var(--accent);
+      }
+      .site-foot {
+        margin-top: 4rem;
+      }
+      .site-foot__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 2rem;
+        flex-wrap: wrap;
+      }
+      .site-foot__links {
+        display: flex;
+        gap: 1.1rem;
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

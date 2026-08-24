@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+import PostRow from '../components/PostRow.astro';
+import Carousel from '../components/Carousel.astro';
+import { site, projects } from '../data/site';
+import { categories } from '../data/categories';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+---
+
+<Base>
+  <!-- Hero: text + carousel side by side -->
+  <section class="wrap hero-grid">
+    <div class="hero-col">
+      <p class="eyebrow">Logbook · {site.role}</p>
+      <h1 class="hero__title">I'm a {site.role.toLowerCase()}.</h1>
+      <p class="hero__lede">{site.intro}</p>
+      <div class="hero__actions">
+        <a href="/blog" class="btn">Read the blog</a>
+        <a href="/projects" class="btn btn--ghost">See projects</a>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <Carousel />
+    </div>
+
+    <ul class="hero__cats" aria-label="What I write about">
+      {
+        categories.map((c) => (
+          <li>
+            <a href={`/blog/category/${c.slug}`} class="tag" style={`--cat:${c.color}`}>
+              {c.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Latest posts -->
+  <section class="wrap section">
+    <header class="sec-head">
+      <h2>Latest entries</h2>
+      <a href="/blog" class="meta sec-head__more">All posts →</a>
+    </header>
+    {
+      posts.length === 0 ? (
+        <p class="empty meta">No entries yet. Add a Markdown file in src/content/blog/.</p>
+      ) : (
+        <div class="rows">
+          {posts.map((p) => (
+            <PostRow
+              title={p.data.title}
+              description={p.data.description}
+              date={p.data.date}
+              category={p.data.category}
+              href={`/blog/${p.slug}`}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Projects preview -->
+  <section class="wrap section">
+    <header class="sec-head">
+      <h2>Selected work</h2>
+      <a href="/projects" class="meta sec-head__more">All projects →</a>
+    </header>
+    <div class="proj-grid">
+      {
+        projects.slice(0, 3).map((proj) => (
+          <article class="proj">
+            <p class="meta">{proj.period}</p>
+            <h3>{proj.title}</h3>
+            <p class="proj__sum">{proj.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Get in touch -->
+  <section class="wrap section touch">
+    <h2>Get in touch</h2>
+    <p class="prose">
+      Building something, hiring, or just want to compare notes? Say hello anytime —
+      or use the <a href="/contact">contact form</a>.
+    </p>
+    <p class="touch__links">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      {site.socials.x && <a href={site.socials.x}>X</a>}
+      {site.socials.linkedin && <a href={site.socials.linkedin}>LinkedIn</a>}
+      {site.socials.github && <a href={site.socials.github}>GitHub</a>}
+    </p>
+  </section>
+
+  <style>
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 1rem + 4vw, 4rem);
+      align-items: center;
+      padding-block: clamp(3rem, 2rem + 5vw, 6rem) 3rem;
+    }
+    .hero__title {
+      margin-top: 0.6rem;
+    }
+    .hero__lede {
+      margin-top: 1.2rem;
+      font-size: 1.2rem;
+      color: var(--ink-soft);
+      max-width: 42ch;
+    }
+    .hero__actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .hero__cats {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.4rem;
+      padding: 0;
+      margin-top: 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      grid-column: 1 / -1;
+    }
+    /* The carousel component brings its own margins; neutralize inside the hero
+       so it aligns with the text column. */
+    .hero-media :global(.carousel) {
+      margin-block: 0;
+    }
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-media {
+        order: 2;
+      }
+    }
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .sec-head__more {
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .empty {
+      padding-block: 2rem;
+    }
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .proj {
+      border-top: 2px solid var(--ink);
+      padding-top: 1rem;
+    }
+    .proj h3 {
+      margin-top: 0.4rem;
+    }
+    .proj__sum {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+    .touch h2 {
+      max-width: 20ch;
+    }
+    .touch .prose {
+      margin-top: 1rem;
+    }
+    .touch__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</Base>

@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE LOGBOOK — design tokens
+   Change the theme in one place. See ROADMAP.md → "Change the theme".
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --paper: #faf7f1;
+  --paper-sunk: #f3eee3;
+  --ink: #17212b;
+  --ink-soft: #4a5a68;
+  --ink-faint: #8a9099;
+  --line: #e4ddd0;
+  --line-strong: #d6ccb8;
+  --accent: #17715e;
+  --accent-ink: #0e4c3f;
+
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --wrap: 68rem;
+  --wrap-prose: 40rem;
+  --step: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Type ─────────────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 460;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink);
+}
+h1 {
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+}
+h2 {
+  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
+}
+h3 {
+  font-size: 1.35rem;
+}
+a {
+  color: var(--accent-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--line-strong);
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* The logbook rail: monospace metadata used everywhere. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ── Layout helpers ───────────────────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+.prose {
+  max-width: var(--wrap-prose);
+}
+.section {
+  padding-block: clamp(3rem, 2rem + 5vw, 5.5rem);
+}
+.divider {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+/* ── Category tag (colored per category) ──────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cat, var(--accent));
+  text-decoration: none;
+}
+.tag::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--cat, var(--accent));
+}
+a.tag:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--cat, var(--accent));
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover {
+  background: transparent;
+  color: var(--ink);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.btn--ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Accessibility ────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ── Prose (blog post body) ───────────────────────────────────────────────── */
+.content h2 {
+  margin-top: 2.4rem;
+  margin-bottom: 0.6rem;
+}
+.content h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+.content p,
+.content ul,
+.content ol,
+.content blockquote {
+  margin-block: 1.1rem;
+}
+.content blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--paper-sunk);
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--line);
+}
+.content pre {
+  background: var(--ink);
+  color: #eae6dc;
+  padding: 1.1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.content pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.content img {
+  max-width: 100%;
+  height: auto;
+}

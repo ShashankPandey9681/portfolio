@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostRow from '../../components/PostRow.astro';
+import { categories } from '../../data/categories';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<Base title="Blog" description="Essays on product, AI, innovation, productivity, and life.">
+  <section class="wrap section">
+    <p class="eyebrow">The Logbook</p>
+    <h1>Blog</h1>
+    <p class="prose lede">
+      Notes and essays. Filter by what you came for — or read the whole stream.
+    </p>
+
+    <nav class="chips" aria-label="Filter by category">
+      <span class="chip is-active">All ({posts.length})</span>
+      {
+        categories.map((c) => (
+          <a href={`/blog/category/${c.slug}`} class="chip" style={`--cat:${c.color}`}>
+            {c.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    {
+      posts.length === 0 ? (
+        <p class="meta empty">
+          No posts yet. Add a Markdown file in <code>src/content/blog/</code>.
+        </p>
+      ) : (
+        <div class="rows">
+          {posts.map((p) => (
+            <PostRow
+              title={p.data.title}
+              description={p.data.description}
+              date={p.data.date}
+              category={p.data.category}
+              href={`/blog/${p.slug}`}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <style>
+    .lede {
+      margin-top: 1rem;
+      color: var(--ink-soft);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 2rem 0 1rem;
+    }
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid var(--line-strong);
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .chip:hover {
+      border-color: var(--cat, var(--accent));
+      color: var(--cat, var(--ink));
+    }
+    .chip.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .empty {
+      padding-block: 2rem;
+    }
+  </style>
+</Base>

@@ -1,0 +1,237 @@
+---
+import { homeImages } from '../data/site';
+const images = homeImages;
+const total = String(images.length).padStart(2, '0');
+---
+
+{
+  images.length > 0 && (
+    <section class="carousel" aria-roledescription="carousel" aria-label="Gallery">
+      <div class="carousel__frame">
+        <ul class="carousel__track" id="carousel-track">
+          {images.map((img, i) => (
+            <li
+              class="carousel__slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${images.length}`}
+            >
+              <img src={img.src} alt={img.alt} loading={i === 0 ? 'eager' : 'lazy'} />
+            </li>
+          ))}
+        </ul>
+
+        <button class="carousel__arrow carousel__arrow--prev" data-dir="-1" aria-label="Previous image">
+          ‹
+        </button>
+        <button class="carousel__arrow carousel__arrow--next" data-dir="1" aria-label="Next image">
+          ›
+        </button>
+      </div>
+
+      <div class="carousel__bar">
+        <p class="carousel__count meta">
+          <span id="carousel-index">01</span> / {total}
+        </p>
+        <ul class="carousel__dots" role="tablist" aria-label="Choose image">
+          {images.map((_, i) => (
+            <li>
+              <button
+                class="carousel__dot"
+                data-to={i}
+                role="tab"
+                aria-label={`Go to image ${i + 1}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .carousel {
+    margin-block: clamp(2rem, 1rem + 3vw, 3.5rem);
+  }
+  .carousel__frame {
+    position: relative;
+  }
+  .carousel__track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border: 1px solid var(--line);
+    /* hide scrollbar but keep function */
+    scrollbar-width: none;
+  }
+  .carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    aspect-ratio: 3 / 2;
+    background: var(--paper-sunk);
+  }
+  .carousel__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.6rem;
+    height: 2.6rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    line-height: 1;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .carousel__arrow:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .carousel__arrow--prev {
+    left: 0.75rem;
+  }
+  .carousel__arrow--next {
+    right: 0.75rem;
+  }
+
+  .carousel__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.9rem;
+  }
+  .carousel__count {
+    margin: 0;
+  }
+  .carousel__dots {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+  .carousel__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .carousel__dot[aria-selected='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .carousel__arrow {
+      width: 2.2rem;
+      height: 2.2rem;
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+<script>
+  // Lightweight, dependency-free carousel controller.
+  function initCarousel() {
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    const slides = Array.from(track.children);
+    const indexLabel = document.getElementById('carousel-index');
+    const dots = Array.from(document.querySelectorAll('.carousel__dot'));
+    const arrows = Array.from(document.querySelectorAll('.carousel__arrow'));
+    const total = slides.length;
+    if (total === 0) return;
+
+    let current = 0;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function goTo(i) {
+      current = (i + total) % total;
+      const slide = slides[current] as HTMLElement;
+      track.scrollTo({ left: slide.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+      update();
+    }
+
+    function update() {
+      if (indexLabel) indexLabel.textContent = String(current + 1).padStart(2, '0');
+      dots.forEach((d, i) =>
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false')
+      );
+    }
+
+    // Sync index when the user scrolls/swipes manually
+    let scrollTimer: number | undefined;
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        const i = Math.round(track.scrollLeft / (track as HTMLElement).clientWidth);
+        if (i !== current) {
+          current = Math.max(0, Math.min(total - 1, i));
+          update();
+        }
+      }, 80);
+    });
+
+    arrows.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const dir = Number((btn as HTMLElement).dataset.dir);
+        stop();
+        goTo(current + dir);
+      })
+    );
+    dots.forEach((dot) =>
+      dot.addEventListener('click', () => {
+        stop();
+        goTo(Number((dot as HTMLElement).dataset.to));
+      })
+    );
+
+    // Auto-advance (paused on hover/focus, off for reduced motion)
+    let timer: number | undefined;
+    function start() {
+      if (reduce) return;
+      stop();
+      timer = window.setInterval(() => goTo(current + 1), 5000);
+    }
+    function stop() {
+      if (timer) window.clearInterval(timer);
+    }
+    const frame = track.closest('.carousel');
+    frame?.addEventListener('mouseenter', stop);
+    frame?.addEventListener('mouseleave', start);
+    frame?.addEventListener('focusin', stop);
+    frame?.addEventListener('focusout', start);
+
+    update();
+    start();
+  }
+
+  // Run now and after Astro view transitions (if enabled later)
+  initCarousel();
+  document.addEventListener('astro:page-load', initCarousel);
+</script>

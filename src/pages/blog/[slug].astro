@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import { categoryBySlug } from '../../data/categories';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const cat = categoryBySlug(post.data.category);
+const stamp = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="wrap section post" style={`--cat:${cat.color}`}>
+    <a href="/blog" class="meta back">← Blog</a>
+    <div class="post__meta">
+      <time class="meta" datetime={post.data.date.toISOString()}>{stamp}</time>
+      <a href={`/blog/category/${cat.slug}`} class="tag">{cat.label}</a>
+    </div>
+    <h1 class="post__title">{post.data.title}</h1>
+    <p class="post__desc prose">{post.data.description}</p>
+    <hr class="divider post__rule" />
+    <div class="content prose">
+      <Content />
+    </div>
+  </article>
+
+  <style>
+    .back {
+      display: inline-block;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+    }
+    .post__meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .post__title {
+      max-width: 20ch;
+    }
+    .post__desc {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: var(--ink-soft);
+    }
+    .post__rule {
+      margin-block: 2rem;
+    }
+  </style>
+</Base>
