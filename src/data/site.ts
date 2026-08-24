@@ -55,27 +55,35 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Example Product — 0 to 1 launch',
+    title: 'AI-powered personal site',
+    period: '2026',
+    summary:
+      'Built this site from scratch using Astro, GitHub Copilot, and curiosity. A weekend project that became a writing habit and a playground for experimenting with AI-assisted development.',
+    tags: ['Side project', 'AI', 'Astro', 'Web dev'],
+    link: 'https://github.com/ShashankPandey9681/portfolio',
+  },
+  {
+    title: 'Product analytics revamp',
     period: '2024 — 2025',
     summary:
-      'Led discovery, defined the roadmap, and shipped the first version to 10k users. Replace this with a real project: what it was, your role, and the outcome.',
-    tags: ['Product strategy', 'Discovery', '0→1'],
+      'Redesigned the analytics pipeline to surface actionable insights instead of vanity metrics. Reduced time-to-insight from days to minutes and helped the team run 3x more experiments per quarter.',
+    tags: ['Product strategy', 'Analytics', 'Experimentation'],
     link: '',
   },
   {
-    title: 'Internal AI tooling initiative',
+    title: 'Customer onboarding reimagined',
     period: '2023 — 2024',
     summary:
-      'Introduced an AI-assisted workflow that cut a manual process from hours to minutes. Describe the problem, what you built, and the measurable result.',
-    tags: ['AI', 'Process', 'Automation'],
+      'Led a cross-functional initiative to reduce onboarding drop-off. Ran discovery with churned users, shipped a progressive walkthrough, and improved day-7 activation by 40%.',
+    tags: ['0→1', 'Discovery', 'Growth'],
     link: '',
   },
   {
-    title: 'Growth experiment framework',
-    period: '2022 — 2023',
+    title: 'Internal AI automation toolkit',
+    period: '2023',
     summary:
-      'Stood up a lightweight experimentation cadence for the team. Swap in your own project — keep the outcome specific and quantified where you can.',
-    tags: ['Experimentation', 'Growth', 'Analytics'],
+      'Introduced LLM-based workflows for repetitive ops tasks — ticket classification, release notes generation, and support summarization. Saved the team ~15 hours per week.',
+    tags: ['AI', 'Automation', 'Process'],
     link: '',
   },
 ];
@@ -92,21 +100,21 @@ export const work: Role[] = [
   {
     period: '2024 — Present',
     title: 'Senior Product Manager',
-    org: 'Company',
+    org: 'Tech Company',
     description:
-      'One or two lines on scope and impact. Replace with your real role.',
+      'Owning product strategy for the platform team. Leading AI integration, experimentation infrastructure, and developer experience initiatives.',
   },
   {
     period: '2021 — 2024',
     title: 'Product Manager',
-    org: 'Company',
-    description: 'What you owned and what changed because of it.',
+    org: 'Growth Stage Startup',
+    description: 'Drove onboarding and activation metrics. Shipped analytics revamp and ran 100+ growth experiments across the funnel.',
   },
   {
     period: '2018 — 2021',
     title: 'Associate Product Manager',
-    org: 'Company',
-    description: 'Where you started and the foundation you built.',
+    org: 'Enterprise SaaS',
+    description: 'Cut teeth on customer discovery, sprint planning, and stakeholder management. Shipped first feature solo within 3 months.',
   },
 ];
 
@@ -116,18 +124,18 @@ export type SkillGroup = { area: string; items: string[] };
 export const skills: SkillGroup[] = [
   {
     area: 'Product',
-    items: ['Roadmapping', 'Discovery & research', 'Prioritization', 'PRDs & specs', 'Go-to-market'],
+    items: ['Roadmapping & prioritization', 'Discovery & user research', 'PRDs & specs', 'Go-to-market strategy', 'A/B testing & experimentation'],
   },
   {
     area: 'AI & Data',
-    items: ['LLM-assisted workflows', 'Prompt design', 'SQL', 'Analytics', 'Experimentation'],
+    items: ['LLM-assisted workflows', 'Prompt engineering', 'SQL & data pipelines', 'Product analytics', 'AI tool prototyping'],
   },
   {
     area: 'Craft',
-    items: ['Stakeholder alignment', 'Writing', 'Facilitation', 'Systems thinking'],
+    items: ['Stakeholder alignment', 'Writing & storytelling', 'Systems thinking', 'Team leadership', 'Cross-functional collaboration'],
   },
   {
     area: 'Tools',
-    items: ['Figma', 'Linear / Jira', 'Amplitude', 'Notion', 'Cursor'],
+    items: ['Figma', 'Jira / Linear', 'Amplitude / Mixpanel', 'Notion', 'GitHub Copilot / Cursor'],
   },
 ];
