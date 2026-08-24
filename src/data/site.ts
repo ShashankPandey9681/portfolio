@@ -4,21 +4,21 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const site = {
-  name: 'Your Name',
-  role: 'Product Manager',
+  name: 'Shashank Pandey',
+  role: 'New Dad | Tinkerer | Product Manager',
   // One-line intro used in the hero and meta description.
   tagline:
-    'Product manager writing about AI, innovation, productivity, and the human side of building things.',
+    'Sports person turned product manager writing about AI, innovation, productivity, and the human side of building things.',
   // A short bio paragraph for the home hero (mention your trajectory —
   // where you've worked, what you focus on). Keep it 2–4 sentences.
   intro:
     "I'm a product manager focused on turning fuzzy problems into shipped products. I've worked across [your companies / domains] — replace this with your real trajectory. Alongside the work, I write about AI, product, and the human side of building things.",
-  email: 'you@your-domain.com',
+  email: 'shashank@spandey.com',
   // Social links — leave a value empty ('') to hide that link.
   socials: {
-    linkedin: 'https://www.linkedin.com/in/your-handle/',
+    linkedin: 'https://www.linkedin.com/in/shashankpandey16/',
     x: 'https://x.com/your-handle',
-    github: 'https://github.com/your-handle',
+    github: 'https://github.com/ShashankPandey9681',
   },
   // Your Formspree form ID (see DEPLOY.md → Contact form). e.g. 'xmyzabcd'
   formspreeId: 'YOUR_FORMSPREE_ID',
