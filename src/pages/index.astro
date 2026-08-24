@@ -19,8 +19,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <h1 class="hero__title">I'm a {site.role.toLowerCase()}.</h1>
       <p class="hero__lede">{site.intro}</p>
       <div class="hero__actions">
-        <a href="/blog" class="btn">Read the blog</a>
-        <a href="/projects" class="btn btn--ghost">See projects</a>
+        <a href="/portfolio/blog" class="btn">Read the blog</a>
+        <a href="/portfolio/projects" class="btn btn--ghost">See projects</a>
       </div>
     </div>
 
@@ -32,7 +32,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       {
         categories.map((c) => (
           <li>
-            <a href={`/blog/category/${c.slug}`} class="tag" style={`--cat:${c.color}`}>
+            <a href={`/portfolio/blog/category/${c.slug}`} class="tag" style={`--cat:${c.color}`}>
               {c.label}
             </a>
           </li>
@@ -47,7 +47,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <section class="wrap section">
     <header class="sec-head">
       <h2>Latest entries</h2>
-      <a href="/blog" class="meta sec-head__more">All posts →</a>
+      <a href="/portfolio/blog" class="meta sec-head__more">All posts →</a>
     </header>
     {
       posts.length === 0 ? (
@@ -60,7 +60,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
               description={p.data.description}
               date={p.data.date}
               category={p.data.category}
-              href={`/blog/${p.slug}`}
+              href={`/portfolio/blog/${p.slug}`}
             />
           ))}
         </div>
@@ -74,7 +74,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <section class="wrap section">
     <header class="sec-head">
       <h2>Selected work</h2>
-      <a href="/projects" class="meta sec-head__more">All projects →</a>
+      <a href="/portfolio/projects" class="meta sec-head__more">All projects →</a>
     </header>
     <div class="proj-grid">
       {
@@ -96,7 +96,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     <h2>Get in touch</h2>
     <p class="prose">
       Building something, hiring, or just want to compare notes? Say hello anytime —
-      or use the <a href="/contact">contact form</a>.
+      or use the <a href="/portfolio/contact">contact form</a>.
     </p>
     <p class="touch__links">
       <a href={`mailto:${site.email}`}>{site.email}</a>
