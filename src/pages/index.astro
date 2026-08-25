@@ -16,7 +16,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <section class="wrap hero-grid">
     <div class="hero-col">
       <p class="eyebrow">Logbook </p>
-      <h1 class="hero__title">{site.role.toLowerCase()}.</h1>
+      <h1 class="hero__title">{site.role}.</h1>
       <p class="hero__lede">{site.intro}</p>
       <div class="hero__actions">
         <a href="/portfolio/blog" class="btn">Read the blog</a>
