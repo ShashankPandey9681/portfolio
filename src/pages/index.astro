@@ -151,6 +151,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       height: auto;
       display: block;
       border: 1px solid var(--line);
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
     }
     @media (max-width: 860px) {
       .hero-grid {
