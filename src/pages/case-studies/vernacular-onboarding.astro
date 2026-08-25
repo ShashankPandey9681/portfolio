@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Vernacular Onboarding — Opportunity or SUS?" description="A product case study on challenging intuitively attractive solutions and discovering the real problem underneath.">
+  <article class="wrap section case-study">
+    <a href="/portfolio/projects" class="meta back">← Projects</a>
+
+    <header class="cs-header">
+      <p class="eyebrow">Case Study · 2018</p>
+      <h1>Vernacular Onboarding — Opportunity or SUS?</h1>
+      <p class="cs-lede">
+        When a localization idea sounds obvious, but the real problem is comprehension, not language.
+      </p>
+      <ul class="cs-tags">
+        <li class="meta cs-tag">Product Discovery</li>
+        <li class="meta cs-tag">Opportunity Assessment</li>
+        <li class="meta cs-tag">Onboarding</li>
+        <li class="meta cs-tag">Localization</li>
+      </ul>
+    </header>
+
+    <div class="cs-body prose">
+      <p>
+        There is a particular kind of product idea that is almost impossible to argue against. It sounds obviously useful, serves an underserved segment, and seems to have a reasonably straightforward implementation path. Vernacular onboarding was one of those ideas. The premise was simple: if a significant portion of our users were more comfortable in their native language than in English, perhaps language was creating friction during onboarding. Translate the experience into regional languages, make it more accessible, and we should see better comprehension and, eventually, better conversion.
+      </p>
+      <p>
+        At first glance, it looked like a classic product opportunity. But the more I thought about it, the more I wondered whether we were jumping from an observation directly to a solution. We had evidence that language preferences existed. We had users who were more comfortable with vernacular content. But did we actually have evidence that language was the reason they were failing to complete onboarding?
+      </p>
+      <p>
+        That distinction matters. A user's preferred language and the reason they abandon a product are not necessarily the same thing.
+      </p>
+
+      <h2>Reframing the question</h2>
+      <p>
+        So instead of starting with the question, "Which languages should we support?", I started with a more uncomfortable question: <strong>"What would we need to believe for vernacular onboarding to be worth building?"</strong> That changed the problem from a feature discussion into an opportunity assessment.
+      </p>
+      <p>
+        We started looking at the onboarding journey itself. Where were users dropping off? Were the drop-offs concentrated among users who preferred regional languages? Which parts of the experience created confusion? Were users struggling to understand terminology, or were they struggling because there were simply too many things to understand at once? Were we asking users to make decisions before they had enough context to make those decisions confidently?
+      </p>
+      <p>
+        The deeper we looked, the more interesting the problem became. Language could absolutely be a source of friction, but it wasn't necessarily the only—or even the primary—source of friction. Some of the onboarding experience was difficult because the product was trying to explain too much. Some terminology was unfamiliar regardless of language. Some steps required users to understand the product's mental model before they had actually experienced the value of the product.
+      </p>
+
+      <h2>Translation ≠ comprehension</h2>
+      <p>
+        That led me to a broader product principle: <strong>translation doesn't automatically equal comprehension.</strong>
+      </p>
+      <p>
+        A badly designed onboarding experience translated into five languages is still a badly designed onboarding experience. If the user doesn't understand why you're asking for something, translating the question doesn't solve the underlying problem. If there are too many decisions, presenting those decisions in a regional language doesn't reduce cognitive load. If the product's value proposition is unclear, localization doesn't magically make it clearer.
+      </p>
+      <p>
+        This made vernacular onboarding much more interesting to me. Instead of thinking about it purely as a localization initiative, I started thinking about it as a broader comprehension and accessibility problem. Could we simplify the flow first? Could we replace product terminology with language users naturally use? Could we progressively introduce concepts rather than explaining everything upfront? Could examples communicate more effectively than instructions? And once those changes were made, how much of the remaining friction could genuinely be attributed to language?
+      </p>
+
+      <h2>Opportunity or SUS?</h2>
+      <p>
+        That is where the "Opportunity or SUS?" question became important. A SUS—shiny unnecessary solution—isn't necessarily a bad idea. It can be a perfectly reasonable solution applied to the wrong problem. The skill, in my view, is recognizing that before significant engineering and organizational effort gets committed.
+      </p>
+      <p>
+        For me, the most valuable part of this project wasn't whether we eventually decided to pursue vernacular onboarding. It was the process of challenging an intuitively attractive solution and trying to understand the problem underneath it. Product discovery isn't about validating ideas. It is about creating enough evidence to make a better decision—even when that decision is to walk away from the original idea.
+      </p>
+
+      <h2>The takeaway</h2>
+      <p>
+        The lesson I took away is one I try to apply to almost every product opportunity: <strong>don't start by asking what you should build. Start by asking what must be true for building it to matter.</strong>
+      </p>
+      <p>
+        Sometimes the best outcome of discovery is a new product.
+      </p>
+      <p>
+        Sometimes it's a better definition of the problem.
+      </p>
+      <p>
+        And occasionally, it's realizing that the feature everyone was excited about wasn't the opportunity after all.
+      </p>
+    </div>
+  </article>
+
+  <style>
+    .back {
+      display: inline-block;
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+    .cs-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .cs-lede {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: var(--ink-soft);
+      max-width: 52ch;
+    }
+    .cs-tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0;
+      margin-top: 1.2rem;
+    }
+    .cs-tag {
+      border: 1px solid var(--line-strong);
+      padding: 0.25rem 0.55rem;
+      color: var(--ink-soft);
+    }
+    .cs-body h2 {
+      margin-top: 2.5rem;
+    }
+    .cs-body p {
+      margin-top: 1rem;
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+  </style>
+</Base>

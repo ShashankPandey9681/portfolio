@@ -55,6 +55,14 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Vernacular onboarding — opportunity or SUS?',
+    period: '2018',
+    summary:
+      'Challenged the intuitive assumption that translating onboarding into regional languages would fix drop-off. Reframed it as a comprehension problem — simplifying flows, replacing jargon, and progressively introducing concepts. Proved that translation doesn\'t automatically equal comprehension.',
+    tags: ['Product discovery', 'Opportunity assessment', 'Onboarding', 'Localization'],
+    link: '/portfolio/case-studies/vernacular-onboarding',
+  },
+  {
     title: 'AI-powered personal site',
     period: '2026',
     summary:

@@ -15,8 +15,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <!-- Hero: text + carousel side by side -->
   <section class="wrap hero-grid">
     <div class="hero-col">
-      <p class="eyebrow">Logbook · {site.role}</p>
-      <h1 class="hero__title">I'm a {site.role.toLowerCase()}.</h1>
+      <p class="eyebrow">Logbook </p>
+      <h1 class="hero__title">{site.role.toLowerCase()}.</h1>
       <p class="hero__lede">{site.intro}</p>
       <div class="hero__actions">
         <a href="/portfolio/blog" class="btn">Read the blog</a>
