@@ -45,12 +45,16 @@ export const nav: { label: string; href: string }[] = [
 ];
 
 // ── Projects ────────────────────────────────────────────────────────────────
+export type ProjectType = 'case-study' | 'personal' | 'external';
+
 export type Project = {
   title: string;
   period: string;
   summary: string;
   tags: string[];
-  link?: string; // optional external URL
+  type: ProjectType;
+  link?: string;        // GitHub URL for personal, external URL for external
+  caseStudySlug?: string; // slug for case study pages (e.g. 'vernacular-onboarding')
 };
 
 export const projects: Project[] = [
@@ -58,9 +62,10 @@ export const projects: Project[] = [
     title: 'Vernacular onboarding — opportunity or SUS?',
     period: '2018',
     summary:
-      'Challenged the intuitive assumption that translating onboarding into regional languages would fix drop-off. Reframed it as a comprehension problem — simplifying flows, replacing jargon, and progressively introducing concepts. Proved that translation doesn\'t automatically equal comprehension.',
+      'Challenged the intuitive assumption that translating onboarding into regional languages would fix drop-off. Reframed it as a comprehension problem — proving that translation doesn\'t automatically equal comprehension.',
     tags: ['Product discovery', 'Opportunity assessment', 'Onboarding', 'Localization'],
-    link: '/portfolio/case-studies/vernacular-onboarding',
+    type: 'case-study',
+    caseStudySlug: 'vernacular-onboarding',
   },
   {
     title: 'AI-powered personal site',
@@ -68,6 +73,7 @@ export const projects: Project[] = [
     summary:
       'Built this site from scratch using Astro, GitHub Copilot, and curiosity. A weekend project that became a writing habit and a playground for experimenting with AI-assisted development.',
     tags: ['Side project', 'AI', 'Astro', 'Web dev'],
+    type: 'personal',
     link: 'https://github.com/ShashankPandey9681/portfolio',
   },
   {
@@ -76,7 +82,7 @@ export const projects: Project[] = [
     summary:
       'Redesigned the analytics pipeline to surface actionable insights instead of vanity metrics. Reduced time-to-insight from days to minutes and helped the team run 3x more experiments per quarter.',
     tags: ['Product strategy', 'Analytics', 'Experimentation'],
-    link: '',
+    type: 'external',
   },
   {
     title: 'Customer onboarding reimagined',
@@ -84,7 +90,7 @@ export const projects: Project[] = [
     summary:
       'Led a cross-functional initiative to reduce onboarding drop-off. Ran discovery with churned users, shipped a progressive walkthrough, and improved day-7 activation by 40%.',
     tags: ['0→1', 'Discovery', 'Growth'],
-    link: '',
+    type: 'external',
   },
   {
     title: 'Internal AI automation toolkit',
@@ -92,7 +98,7 @@ export const projects: Project[] = [
     summary:
       'Introduced LLM-based workflows for repetitive ops tasks — ticket classification, release notes generation, and support summarization. Saved the team ~15 hours per week.',
     tags: ['AI', 'Automation', 'Process'],
-    link: '',
+    type: 'external',
   },
 ];
 

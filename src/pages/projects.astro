@@ -1,36 +1,69 @@
 ---
 import Base from '../layouts/Base.astro';
 import { projects } from '../data/site';
+
+function projectHref(p: typeof projects[0]): string | undefined {
+  if (p.type === 'case-study' && p.caseStudySlug) return `/portfolio/case-studies/${p.caseStudySlug}`;
+  if (p.type === 'personal' && p.link) return p.link;
+  if (p.type === 'external' && p.link) return p.link;
+  return undefined;
+}
+
+const typeLabel: Record<string, string> = {
+  'case-study': '📄 Case Study',
+  'personal': '🛠 Personal Project',
+  'external': '🔗 Project',
+};
 ---
 
-<Base title="Projects" description="Selected product work and side projects.">
+<Base title="Projects" description="Selected product work, case studies, and side projects.">
   <section class="wrap section">
     <p class="eyebrow">Logbook · Work</p>
     <h1>Projects</h1>
     <p class="prose lede">
-      A selection of things I've shipped and shaped. Each entry: what it was, my
-      role, and what changed because of it.
+      Case studies, personal builds, and product work I've shaped. Click through for the full story.
     </p>
 
     <div class="projects">
       {
-        projects.map((p, i) => (
-          <article class="project">
-            <div class="project__index meta">{String(i + 1).padStart(2, '0')}</div>
-            <div class="project__main">
-              <p class="meta">{p.period}</p>
-              <h2 class="project__title">
-                {p.link ? <a href={p.link}>{p.title}</a> : p.title}
-              </h2>
-              <p class="project__sum">{p.summary}</p>
-              <ul class="project__tags">
-                {p.tags.map((t) => (
-                  <li class="meta project__tag">{t}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))
+        projects.map((p, i) => {
+          const href = projectHref(p);
+          const isExternal = p.type === 'personal' || (p.type === 'external' && p.link);
+          return (
+            <article class:list={['project', `project--${p.type}`]}>
+              <div class="project__index meta">{String(i + 1).padStart(2, '0')}</div>
+              <div class="project__main">
+                <div class="project__meta-row">
+                  <span class="meta">{p.period}</span>
+                  <span class="project__type-badge meta">{typeLabel[p.type]}</span>
+                </div>
+                <h2 class="project__title">
+                  {href ? (
+                    <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined}>
+                      {p.title}
+                      {isExternal && <span class="project__ext">↗</span>}
+                      {p.type === 'case-study' && <span class="project__ext">→</span>}
+                    </a>
+                  ) : (
+                    p.title
+                  )}
+                </h2>
+                <p class="project__sum">{p.summary}</p>
+                <ul class="project__tags">
+                  {p.tags.map((t) => (
+                    <li class="meta project__tag">{t}</li>
+                  ))}
+                </ul>
+                {p.type === 'case-study' && href && (
+                  <a href={href} class="project__cta meta">Read case study →</a>
+                )}
+                {p.type === 'personal' && href && (
+                  <a href={href} class="project__cta meta" target="_blank" rel="noopener">View on GitHub ↗</a>
+                )}
+              </div>
+            </article>
+          );
+        })
       }
     </div>
   </section>
@@ -50,12 +83,52 @@ import { projects } from '../data/site';
       padding-block: 2rem;
       border-top: 1px solid var(--line);
     }
+    .project--case-study {
+      border-top: 2px solid var(--accent);
+    }
     .project__index {
       color: var(--accent);
       padding-top: 0.3rem;
     }
+    .project__meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .project__type-badge {
+      padding: 0.2rem 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+    }
+    .project--case-study .project__type-badge {
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+    .project--personal .project__type-badge {
+      background: color-mix(in srgb, #17715E 12%, transparent);
+      color: #17715E;
+      border: 1px solid color-mix(in srgb, #17715E 30%, transparent);
+    }
+    .project--external .project__type-badge {
+      background: color-mix(in srgb, var(--ink-soft) 8%, transparent);
+      color: var(--ink-soft);
+      border: 1px solid var(--line-strong);
+    }
     .project__title {
       margin-top: 0.3rem;
+    }
+    .project__title a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .project__title a:hover {
+      color: var(--accent);
+    }
+    .project__ext {
+      font-size: 0.75em;
+      margin-left: 0.3rem;
+      opacity: 0.6;
     }
     .project__sum {
       color: var(--ink-soft);
@@ -74,6 +147,17 @@ import { projects } from '../data/site';
       border: 1px solid var(--line-strong);
       padding: 0.25rem 0.55rem;
       color: var(--ink-soft);
+    }
+    .project__cta {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 500;
+      transition: opacity 0.15s ease;
+    }
+    .project__cta:hover {
+      opacity: 0.7;
     }
     @media (max-width: 560px) {
       .project {
