@@ -1,21 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
+
+const sections = [
+  { id: 'tldr', label: 'TL;DR' },
+  { id: 'context', label: 'Context' },
+  { id: 'opportunity', label: 'Opportunity' },
+  { id: 'hypothesis', label: 'Hypothesis' },
+  { id: 'discovery', label: 'Discovery' },
+  { id: 'insight', label: 'Key Insight' },
+  { id: 'action', label: 'What We Did' },
+  { id: 'outcome', label: 'Outcome' },
+  { id: 'reflection', label: 'Reflection' },
+];
 ---
 
 <Base title="Vernacular Onboarding — Opportunity or SUS?" description="A product case study on challenging intuitively attractive solutions and discovering the real problem underneath.">
   <article class="wrap section case-study">
     <a href="/portfolio/projects" class="meta back">← Back to Projects</a>
 
-    <!-- ── Hero ── -->
     <header class="cs-hero">
       <span class="cs-badge meta">📄 Case Study</span>
       <h1>Vernacular Onboarding — Opportunity or SUS?</h1>
-      <p class="cs-lede">
-        When a localization idea sounds obvious, but the real problem is comprehension, not language.
-      </p>
+      <p class="cs-lede">When a localization idea sounds obvious, but the real problem is comprehension, not language.</p>
     </header>
 
-    <!-- ── Metadata sidebar ── -->
     <div class="cs-grid">
       <aside class="cs-sidebar">
         <div class="cs-meta-card">
@@ -42,111 +50,117 @@ import Base from '../../layouts/Base.astro';
           </div>
         </div>
 
-        <div class="cs-tldr">
-          <h3 class="cs-tldr-title meta">TL;DR</h3>
-          <p>Challenged a popular localization feature request by reframing it as a comprehension problem. Proved that translation ≠ comprehension, leading to a simpler, more impactful redesign of the onboarding flow itself.</p>
-        </div>
+        <nav class="cs-toc" aria-label="Case study sections">
+          <p class="cs-toc-title meta">On this page</p>
+          <ul class="cs-toc-list">
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="cs-toc-link" data-section={s.id}>{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </aside>
 
-      <!-- ── Main content ── -->
       <div class="cs-content">
 
-        <!-- Context -->
-        <section class="cs-section">
+        <section class="cs-section" id="tldr">
           <div class="cs-section-label">
             <span class="cs-section-num meta">01</span>
+            <h2>TL;DR</h2>
+          </div>
+          <div class="cs-section-body">
+            <div class="cs-tldr-box">
+              <p>Challenged a popular localization feature request by reframing it as a comprehension problem. Investigated whether language was truly the barrier to onboarding completion — or whether the flow itself was the issue. Proved that <strong>translation ≠ comprehension</strong>, leading to a simpler, more impactful redesign of the onboarding flow itself.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="context">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">02</span>
             <h2>Context</h2>
           </div>
           <div class="cs-section-body prose">
-            <p>
-              There is a particular kind of product idea that is almost impossible to argue against. It sounds obviously useful, serves an underserved segment, and seems to have a reasonably straightforward implementation path. Vernacular onboarding was one of those ideas.
-            </p>
-            <p>
-              The premise was simple: if a significant portion of our users were more comfortable in their native language than in English, perhaps language was creating friction during onboarding. Translate the experience into regional languages, make it more accessible, and we should see better comprehension and, eventually, better conversion.
-            </p>
+            <p>There is a particular kind of product idea that is almost impossible to argue against. It sounds obviously useful, serves an underserved segment, and seems to have a reasonably straightforward implementation path. Vernacular onboarding was one of those ideas.</p>
+            <p>The premise was simple: if a significant portion of our users were more comfortable in their native language than in English, perhaps language was creating friction during onboarding. Translate the experience into regional languages, make it more accessible, and we should see better comprehension and, eventually, better conversion.</p>
           </div>
         </section>
 
-        <!-- Problem -->
-        <section class="cs-section">
-          <div class="cs-section-label">
-            <span class="cs-section-num meta">02</span>
-            <h2>The Problem</h2>
-          </div>
-          <div class="cs-section-body prose">
-            <p>
-              At first glance, it looked like a classic product opportunity. But the more I thought about it, the more I wondered whether we were jumping from an observation directly to a solution. We had evidence that language preferences existed. We had users who were more comfortable with vernacular content. But did we actually have evidence that language was the reason they were failing to complete onboarding?
-            </p>
-            <p>
-              That distinction matters. A user's preferred language and the reason they abandon a product are not necessarily the same thing.
-            </p>
-          </div>
-        </section>
-
-        <!-- Approach -->
-        <section class="cs-section">
+        <section class="cs-section" id="opportunity">
           <div class="cs-section-label">
             <span class="cs-section-num meta">03</span>
-            <h2>Approach</h2>
+            <h2>Opportunity / Problem Space</h2>
           </div>
           <div class="cs-section-body prose">
-            <p>
-              Instead of starting with "Which languages should we support?", I started with a more uncomfortable question: <strong>"What would we need to believe for vernacular onboarding to be worth building?"</strong> That changed the problem from a feature discussion into an opportunity assessment.
-            </p>
-            <p>
-              We started looking at the onboarding journey itself. Where were users dropping off? Were the drop-offs concentrated among users who preferred regional languages? Were users struggling to understand terminology, or were they struggling because there were simply too many things to understand at once?
-            </p>
-            <p>
-              The deeper we looked, the more interesting the problem became. Language could absolutely be a source of friction, but it wasn't necessarily the only—or even the primary—source. Some of the onboarding experience was difficult because the product was trying to explain too much. Some terminology was unfamiliar regardless of language. Some steps required users to understand the product's mental model before they had actually experienced the value.
-            </p>
+            <p>At first glance, it looked like a classic product opportunity. But the more I thought about it, the more I wondered whether we were jumping from an observation directly to a solution. We had evidence that language preferences existed. We had users who were more comfortable with vernacular content. But did we actually have evidence that language was the reason they were failing to complete onboarding?</p>
+            <p>That distinction matters. A user's preferred language and the reason they abandon a product are not necessarily the same thing.</p>
           </div>
         </section>
 
-        <!-- Key Insight -->
-        <section class="cs-section">
+        <section class="cs-section" id="hypothesis">
           <div class="cs-section-label">
             <span class="cs-section-num meta">04</span>
+            <h2>The Hypothesis</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Instead of starting with "Which languages should we support?", I started with a more uncomfortable question: <strong>"What would we need to believe for vernacular onboarding to be worth building?"</strong></p>
+            <p>That changed the problem from a feature discussion into an opportunity assessment. If language was truly the barrier, we'd expect to see drop-offs concentrated among users who preferred regional languages, and those drop-offs would correlate with comprehension failures — not product complexity.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="discovery">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">05</span>
+            <h2>Discovery &amp; Approach</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>We started looking at the onboarding journey itself. Where were users dropping off? Were the drop-offs concentrated among users who preferred regional languages? Were users struggling to understand terminology, or were they struggling because there were simply too many things to understand at once?</p>
+            <p>The deeper we looked, the more interesting the problem became. Language could absolutely be a source of friction, but it wasn't necessarily the only — or even the primary — source. Some of the onboarding experience was difficult because the product was trying to explain too much. Some terminology was unfamiliar regardless of language. Some steps required users to understand the product's mental model before they had actually experienced its value.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="insight">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">06</span>
             <h2>Key Insight</h2>
           </div>
           <div class="cs-section-body prose">
-            <blockquote class="cs-quote">
-              Translation doesn't automatically equal comprehension.
-            </blockquote>
-            <p>
-              A badly designed onboarding experience translated into five languages is still a badly designed onboarding experience. If the user doesn't understand why you're asking for something, translating the question doesn't solve the underlying problem. If there are too many decisions, presenting those decisions in a regional language doesn't reduce cognitive load.
-            </p>
-            <p>
-              This reframed vernacular onboarding from a localization initiative into a broader comprehension and accessibility problem. Could we simplify the flow first? Could we replace product terminology with language users naturally use? Could we progressively introduce concepts? Could examples communicate more effectively than instructions?
-            </p>
+            <blockquote class="cs-quote">Translation doesn't automatically equal comprehension.</blockquote>
+            <p>A badly designed onboarding experience translated into five languages is still a badly designed onboarding experience. If the user doesn't understand why you're asking for something, translating the question doesn't solve the underlying problem. If there are too many decisions, presenting those decisions in a regional language doesn't reduce cognitive load.</p>
+            <p>This reframed vernacular onboarding from a localization initiative into a broader comprehension and accessibility problem. Could we simplify the flow first? Could we replace product terminology with language users naturally use? Could we progressively introduce concepts? Could examples communicate more effectively than instructions?</p>
           </div>
         </section>
 
-        <!-- Outcome -->
-        <section class="cs-section">
+        <section class="cs-section" id="action">
           <div class="cs-section-label">
-            <span class="cs-section-num meta">05</span>
-            <h2>Outcome</h2>
+            <span class="cs-section-num meta">07</span>
+            <h2>What We Did</h2>
           </div>
           <div class="cs-section-body prose">
-            <p>
-              A SUS—shiny unnecessary solution—isn't necessarily a bad idea. It can be a perfectly reasonable solution applied to the wrong problem. The skill is recognizing that before significant engineering and organizational effort gets committed.
-            </p>
-            <p>
-              The most valuable part of this project wasn't whether we eventually decided to pursue vernacular onboarding. It was the process of challenging an intuitively attractive solution and trying to understand the problem underneath it. Product discovery isn't about validating ideas—it's about creating enough evidence to make a better decision.
-            </p>
+            <p>Rather than jumping to a translation project, we paused and focused on the onboarding flow itself. We simplified decision points, replaced jargon with natural language, introduced concepts progressively, and used examples instead of explanations where possible.</p>
+            <p>Only after these changes would we assess how much remaining friction could genuinely be attributed to language — and whether localization was still worth the investment.</p>
           </div>
         </section>
 
-        <!-- Takeaway -->
-        <section class="cs-section cs-section--takeaway">
+        <section class="cs-section" id="outcome">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">08</span>
+            <h2>Outcome &amp; Impact</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>A SUS — shiny unnecessary solution — isn't necessarily a bad idea. It can be a perfectly reasonable solution applied to the wrong problem. The skill is recognizing that before significant engineering and organizational effort gets committed.</p>
+            <p>The most valuable part of this project wasn't whether we eventually decided to pursue vernacular onboarding. It was the process of challenging an intuitively attractive solution and uncovering the real problem underneath. Product discovery isn't about validating ideas — it's about creating enough evidence to make a better decision.</p>
+          </div>
+        </section>
+
+        <section class="cs-section cs-section--highlight" id="reflection">
           <div class="cs-section-label">
             <span class="cs-section-num meta">✦</span>
-            <h2>Takeaway</h2>
+            <h2>Reflection</h2>
           </div>
           <div class="cs-section-body prose">
-            <p>
-              <strong>Don't start by asking what you should build. Start by asking what must be true for building it to matter.</strong>
-            </p>
+            <p><strong>Don't start by asking what you should build. Start by asking what must be true for building it to matter.</strong></p>
             <p>Sometimes the best outcome of discovery is a new product.</p>
             <p>Sometimes it's a better definition of the problem.</p>
             <p>And occasionally, it's realizing that the feature everyone was excited about wasn't the opportunity after all.</p>
@@ -158,169 +172,70 @@ import Base from '../../layouts/Base.astro';
   </article>
 
   <style>
-    .back {
-      display: inline-block;
-      text-decoration: none;
-      margin-bottom: 2rem;
-    }
+    .back { display: inline-block; text-decoration: none; margin-bottom: 2rem; }
 
-    /* Hero */
-    .cs-hero {
-      padding-bottom: 2.5rem;
-      border-bottom: 2px solid var(--ink);
-      margin-bottom: 3rem;
-    }
-    .cs-badge {
-      display: inline-block;
-      padding: 0.3rem 0.7rem;
-      background: color-mix(in srgb, var(--accent) 12%, transparent);
-      color: var(--accent);
-      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-      margin-bottom: 1.2rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-    }
-    .cs-hero h1 {
-      max-width: 22ch;
-    }
-    .cs-lede {
-      margin-top: 1rem;
-      font-size: 1.25rem;
-      color: var(--ink-soft);
-      max-width: 52ch;
-      line-height: 1.5;
-    }
+    .cs-hero { padding-bottom: 2.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 3rem; }
+    .cs-badge { display: inline-block; padding: 0.3rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); margin-bottom: 1.2rem; font-size: 0.72rem; letter-spacing: 0.04em; }
+    .cs-hero h1 { max-width: 22ch; }
+    .cs-lede { margin-top: 1rem; font-size: 1.25rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.5; }
 
-    /* Grid layout */
-    .cs-grid {
-      display: grid;
-      grid-template-columns: 16rem 1fr;
-      gap: 4rem;
-    }
+    .cs-grid { display: grid; grid-template-columns: 15rem 1fr; gap: 4rem; }
 
-    /* Sidebar */
-    .cs-sidebar {
-      position: sticky;
-      top: 6rem;
-      align-self: start;
-    }
-    .cs-meta-card {
-      border-top: 2px solid var(--accent);
-      padding-top: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-    .cs-meta-label {
-      display: block;
-      color: var(--ink-soft);
-      margin-bottom: 0.3rem;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .cs-meta-value {
-      font-size: 0.95rem;
-    }
-    .cs-skill-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      font-size: 0.9rem;
-    }
-    .cs-tldr {
-      margin-top: 2rem;
-      padding: 1.2rem;
-      background: color-mix(in srgb, var(--ink) 4%, transparent);
-      border: 1px solid var(--line);
-    }
-    .cs-tldr-title {
-      margin-bottom: 0.6rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-    }
-    .cs-tldr p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--ink-soft);
-      margin: 0;
-    }
+    .cs-sidebar { position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }
+    .cs-meta-card { border-top: 2px solid var(--accent); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .cs-meta-label { display: block; color: var(--ink-soft); margin-bottom: 0.3rem; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cs-meta-value { font-size: 0.92rem; }
+    .cs-skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.88rem; }
 
-    /* Content sections */
-    .cs-section {
-      padding-bottom: 2.5rem;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .cs-section:last-child {
-      border-bottom: none;
-    }
-    .cs-section-label {
-      display: flex;
-      align-items: baseline;
-      gap: 0.8rem;
-      margin-bottom: 1.2rem;
-    }
-    .cs-section-num {
-      color: var(--accent);
-      font-size: 0.8rem;
-    }
-    .cs-section-label h2 {
-      font-size: 1.3rem;
-      margin: 0;
-    }
-    .cs-section-body p {
-      margin-top: 1rem;
-      max-width: 58ch;
-      line-height: 1.75;
-    }
-    .cs-section-body p:first-child {
-      margin-top: 0;
-    }
+    .cs-toc { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .cs-toc-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 0.6rem; }
+    .cs-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+    .cs-toc-link { display: block; padding: 0.35rem 0.7rem; font-size: 0.82rem; color: var(--ink-soft); text-decoration: none; border-left: 2px solid transparent; transition: color 0.15s ease, border-color 0.15s ease; }
+    .cs-toc-link:hover { color: var(--ink); }
+    .cs-toc-link.is-active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
 
-    /* Quote */
-    .cs-quote {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 500;
-      line-height: 1.4;
-      color: var(--ink);
-      border-left: 3px solid var(--accent);
-      padding-left: 1.5rem;
-      margin: 0 0 1.5rem 0;
-      max-width: 36ch;
-    }
+    .cs-section { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); scroll-margin-top: 5rem; }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-label { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .cs-section-num { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+    .cs-section-label h2 { font-size: 1.3rem; margin: 0; }
+    .cs-section-body p { margin-top: 1rem; max-width: 58ch; line-height: 1.75; }
+    .cs-section-body p:first-child { margin-top: 0; }
 
-    /* Takeaway section */
-    .cs-section--takeaway {
-      background: color-mix(in srgb, var(--accent) 5%, transparent);
-      padding: 2rem;
-      border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-      border-bottom: none;
-    }
+    .cs-tldr-box { padding: 1.5rem; background: color-mix(in srgb, var(--ink) 4%, transparent); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+    .cs-tldr-box p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 58ch; }
+
+    .cs-quote { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.4; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 0 0 1.5rem 0; max-width: 36ch; }
+
+    .cs-section--highlight { background: color-mix(in srgb, var(--accent) 5%, transparent); padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-bottom: none; }
 
     @media (max-width: 768px) {
-      .cs-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .cs-sidebar {
-        position: static;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .cs-sidebar {
-        grid-template-columns: 1fr;
-      }
+      .cs-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cs-sidebar { position: static; max-height: none; }
+      .cs-toc { display: none; }
     }
   </style>
+
+  <script>
+    function initScrollspy() {
+      const links = document.querySelectorAll('.cs-toc-link');
+      const sectionIds = Array.from(links).map(l => l.getAttribute('data-section'));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            const active = document.querySelector(`.cs-toc-link[data-section="${entry.target.id}"]`);
+            if (active) active.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    }
+    initScrollspy();
+    document.addEventListener('astro:page-load', initScrollspy);
+  </script>
 </Base>
