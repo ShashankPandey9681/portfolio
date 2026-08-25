@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostRow from '../components/PostRow.astro';
-import Carousel from '../components/Carousel.astro';
-import { site, projects } from '../data/site';
+import { site, homeImages, projects } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 import { categories } from '../data/categories';
 import { getCollection } from 'astro:content';
 
@@ -25,7 +25,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     </div>
 
     <div class="hero-media">
-      <Carousel />
+      <img src={`${base}${homeImages[0].src}`} alt={homeImages[0].alt} class="hero-img" />
     </div>
 
     <ul class="hero__cats" aria-label="What I write about">
@@ -116,6 +116,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     }
     .hero__title {
       margin-top: 0.6rem;
+      white-space: nowrap;
     }
     .hero__lede {
       margin-top: 1.2rem;
@@ -144,6 +145,12 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
        so it aligns with the text column. */
     .hero-media :global(.carousel) {
       margin-block: 0;
+    }
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--line);
     }
     @media (max-width: 860px) {
       .hero-grid {
