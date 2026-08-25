@@ -1,6 +1,7 @@
 ---
 import { homeImages } from '../data/site';
-const images = homeImages;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const images = homeImages.map(img => ({ ...img, src: `${base}${img.src}` }));
 const total = String(images.length).padStart(2, '0');
 ---
 

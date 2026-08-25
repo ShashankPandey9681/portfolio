@@ -5,7 +5,7 @@
 
 export const site = {
   name: 'Shashank Pandey',
-  role: 'New Dad | Tinkerer | Product Manager',
+  role: 'New Dad | Tinkerer',
   // One-line intro used in the hero and meta description.
   tagline:
     'Sports person turned product manager writing about AI, innovation, productivity, and the human side of building things.',
