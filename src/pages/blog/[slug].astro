@@ -24,7 +24,7 @@ const stamp = post.data.date.toLocaleDateString('en-US', {
 
 <Base title={post.data.title} description={post.data.description}>
   <article class="wrap section post" style={`--cat:${cat.color}`}>
-    <a href="/portfolio/blog" class="meta back">← Blog</a>
+    <a href="/blog" class="meta back">← Blog</a>
     <div class="post__meta">
       <time class="meta" datetime={post.data.date.toISOString()}>{stamp}</time>
       <a href={`/blog/category/${cat.slug}`} class="tag">{cat.label}</a>

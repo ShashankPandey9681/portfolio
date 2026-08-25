@@ -34,11 +34,11 @@ export const homeImages: { src: string; alt: string }[] = [
 
 // Top navigation.
 export const nav: { label: string; href: string }[] = [
-  { label: 'Projects', href: '/portfolio/projects' },
-  { label: 'Skills', href: '/portfolio/skills' },
-  { label: 'Blog', href: '/portfolio/blog' },
-  { label: 'About', href: '/portfolio/about' },
-  { label: 'Contact', href: '/portfolio/contact' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Skills', href: '/skills' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 // ── Projects ────────────────────────────────────────────────────────────────

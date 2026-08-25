@@ -21,7 +21,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
       <span class="chip is-active">All ({posts.length})</span>
       {
         categories.map((c) => (
-          <a href={`/portfolio/blog/category/${c.slug}`} class="chip" style={`--cat:${c.color}`}>
+          <a href={`/blog/category/${c.slug}`} class="chip" style={`--cat:${c.color}`}>
             {c.label}
           </a>
         ))
@@ -41,7 +41,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
               description={p.data.description}
               date={p.data.date}
               category={p.data.category}
-              href={`/portfolio/blog/${p.slug}`}
+              href={`/blog/${p.slug}`}
             />
           ))}
         </div>
