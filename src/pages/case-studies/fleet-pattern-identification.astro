@@ -1,0 +1,238 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const sections = [
+  { id: 'tldr', label: 'TL;DR' },
+  { id: 'context', label: 'Context' },
+  { id: 'problem', label: 'The Problem' },
+  { id: 'opportunity', label: 'The Opportunity' },
+  { id: 'chain', label: 'The Product Chain' },
+  { id: 'action', label: 'Insights Without Action' },
+  { id: 'ai-role', label: 'Role of AI' },
+  { id: 'reflection', label: 'Reflection' },
+];
+---
+
+<Base title="Fleet Pattern Identification — How Small Businesses Lose Millions" description="A product case study on turning fleet operational data into business insights that drive action, not just visibility.">
+  <article class="wrap section case-study">
+    <a href="/projects" class="meta back">← Back to Projects</a>
+
+    <header class="cs-hero">
+      <span class="cs-badge meta">📄 Case Study</span>
+      <h1>Fleet Pattern Identification — How Small Businesses Lose Millions</h1>
+      <p class="cs-lede">When the problem isn't a lack of data — it's that nobody noticed the pattern.</p>
+    </header>
+
+    <div class="cs-grid">
+      <aside class="cs-sidebar">
+        <div class="cs-meta-card">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Year</span>
+            <span class="cs-meta-value">2022 — 2023</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Role</span>
+            <span class="cs-meta-value">Senior Product Manager — New Business, Loconav</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Domain</span>
+            <span class="cs-meta-value">Fleet Analytics · SMB · AI</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Skills</span>
+            <ul class="cs-skill-list">
+              <li>Product Strategy</li>
+              <li>Data Product Design</li>
+              <li>AI Application</li>
+              <li>SMB Insight</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="cs-toc" aria-label="Case study sections">
+          <p class="cs-toc-title meta">On this page</p>
+          <ul class="cs-toc-list">
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="cs-toc-link" data-section={s.id}>{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="tldr">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">01</span>
+            <h2>TL;DR</h2>
+          </div>
+          <div class="cs-section-body">
+            <div class="cs-tldr-box">
+              <p>Small fleet operators have more data than ever but still make decisions on intuition. Dashboards tell them <em>what is happening</em> — not <em>what they should care about</em>. The opportunity was to build a product that <strong>finds the insight for the customer</strong>, connects patterns to financial consequences, and recommends action. Not another dashboard — a decision-support system.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="context">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">02</span>
+            <h2>Context</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Small businesses have more operational data than ever before. A fleet operator might know where every vehicle is, how much fuel it consumed, how long it spent on a route, when it stopped, how many deliveries it completed, and how frequently it deviated from expected routes. On paper, this should make running a fleet significantly easier.</p>
+            <p>But having data and being able to use data are two very different things.</p>
+            <p>Imagine a business owner operating a fleet of fifty vehicles. Every vehicle generates thousands of data points every day. The business may already have dashboards showing utilization, fuel consumption, idle time, route performance, and driver behavior. Yet the owner could still be making decisions based largely on intuition.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="problem">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">03</span>
+            <h2>The Problem</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <blockquote class="cs-quote">Dashboards answer "What is happening?" They don't answer "What should I care about?"</blockquote>
+            <p>The obvious product response to operational data is to create more visibility. Give users more charts. Add filters. Add reports. Build another dashboard. But there is a fundamental limitation to that approach: it assumes the user already knows what they are looking for.</p>
+            <p>A small-business owner often doesn't.</p>
+            <p>They know that costs are increasing. They know margins are under pressure. They know some vehicles appear to be less efficient than others. But they don't necessarily have the time or analytical expertise to investigate thousands of individual trips looking for recurring patterns.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="opportunity">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">04</span>
+            <h2>The Opportunity</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Instead of asking the customer to find the insight, the product should find the insight for them.</p>
+            <p>Imagine the difference between two experiences.</p>
+            <p>The first tells the owner that a vehicle has spent 18% more time idle than the fleet average.</p>
+            <p>The second says that the vehicle has repeatedly spent approximately forty minutes waiting at the same location during the same time window, and that this recurring pattern has potentially cost the business ₹X over the last three months.</p>
+            <p><strong>The first is analytics. The second is a business insight.</strong> And that difference is enormous.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="chain">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">05</span>
+            <h2>The Product Chain</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>The real product challenge isn't simply identifying anomalies. It is connecting patterns to consequences. A business owner doesn't really care that a particular route has an unusually high deviation rate. They care that the deviation may be increasing fuel costs, delaying deliveries, or reducing the number of trips the vehicle can complete in a day.</p>
+            <p>This creates a product chain that I find particularly powerful:</p>
+            <blockquote class="cs-quote">Pattern → Explanation → Financial impact → Recommended action.</blockquote>
+            <p>The first step is detecting something unusual. The second is helping the customer understand why it matters. The third translates that problem into a business consequence. The fourth helps the customer decide what to do.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="action">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">06</span>
+            <h2>Insights Without Action</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>That last step is critical. Insights without action quickly become another dashboard that nobody opens.</p>
+            <p>The product should eventually be able to say something like: "This pattern is costing you approximately ₹X per month. Here are the three operational changes that could reduce it."</p>
+            <p>At that point, the product isn't really a fleet-monitoring tool anymore. It becomes a decision-support system.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="ai-role">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">07</span>
+            <h2>Role of AI</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>There is often a temptation to start with the technology: "Can we use AI to analyze this data?" I think the better question is: <strong>"What decision is currently too difficult or time-consuming for the customer to make?"</strong></p>
+            <p>Once that is clear, AI becomes a means rather than the product itself.</p>
+            <p>The irony is that the more sophisticated the underlying system becomes, the simpler the user experience should feel. The customer shouldn't need to understand the algorithms, statistical models, or data pipelines. They shouldn't need to write queries or build dashboards.</p>
+            <p>They should simply understand what is happening, why it matters, and what they can do about it.</p>
+          </div>
+        </section>
+
+        <section class="cs-section cs-section--highlight" id="reflection">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">✦</span>
+            <h2>Reflection</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p><strong>The product I find interesting isn't another system that gives small businesses more data. It's one that helps them see the expensive patterns hidden inside the data they already have.</strong></p>
+            <p>Because sometimes businesses don't lose millions because they lack information.</p>
+            <p>They lose it because nobody noticed the pattern.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .back { display: inline-block; text-decoration: none; margin-bottom: 2rem; }
+
+    .cs-hero { padding-bottom: 2.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 3rem; }
+    .cs-badge { display: inline-block; padding: 0.3rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); margin-bottom: 1.2rem; font-size: 0.72rem; letter-spacing: 0.04em; }
+    .cs-hero h1 { max-width: 22ch; }
+    .cs-lede { margin-top: 1rem; font-size: 1.25rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.5; }
+
+    .cs-grid { display: grid; grid-template-columns: 15rem 1fr; gap: 4rem; }
+
+    .cs-sidebar { position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }
+    .cs-meta-card { border-top: 2px solid var(--accent); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .cs-meta-label { display: block; color: var(--ink-soft); margin-bottom: 0.3rem; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cs-meta-value { font-size: 0.92rem; }
+    .cs-skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.88rem; }
+
+    .cs-toc { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .cs-toc-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 0.6rem; }
+    .cs-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+    .cs-toc-link { display: block; padding: 0.35rem 0.7rem; font-size: 0.82rem; color: var(--ink-soft); text-decoration: none; border-left: 2px solid transparent; transition: color 0.15s ease, border-color 0.15s ease; }
+    .cs-toc-link:hover { color: var(--ink); }
+    .cs-toc-link.is-active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
+
+    .cs-section { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); scroll-margin-top: 5rem; }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-label { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .cs-section-num { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+    .cs-section-label h2 { font-size: 1.3rem; margin: 0; }
+    .cs-section-body p { margin-top: 1rem; max-width: 58ch; line-height: 1.75; }
+    .cs-section-body p:first-child { margin-top: 0; }
+
+    .cs-tldr-box { padding: 1.5rem; background: color-mix(in srgb, var(--ink) 4%, transparent); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+    .cs-tldr-box p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 58ch; }
+
+    .cs-quote { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.4; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 0 0 1.5rem 0; max-width: 36ch; }
+
+    .cs-section--highlight { background: color-mix(in srgb, var(--accent) 5%, transparent); padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .cs-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cs-sidebar { position: static; max-height: none; }
+      .cs-toc { display: none; }
+    }
+  </style>
+
+  <script>
+    function initScrollspy() {
+      const links = document.querySelectorAll('.cs-toc-link');
+      const sectionIds = Array.from(links).map(l => l.getAttribute('data-section'));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            const active = document.querySelector(`.cs-toc-link[data-section="${entry.target.id}"]`);
+            if (active) active.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    }
+    initScrollspy();
+    document.addEventListener('astro:page-load', initScrollspy);
+  </script>
+</Base>

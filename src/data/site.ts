@@ -65,6 +65,15 @@ export const projects: Project[] = [
     caseStudySlug: 'short-video-commerce',
   },
   {
+    title: 'Fleet pattern identification — how small businesses lose millions',
+    period: '2022 — 2023',
+    summary:
+      'Rethought fleet analytics from dashboards to decision-support. Instead of showing operators more data, the product finds expensive patterns hidden in their data and connects them to financial consequences.',
+    tags: ['Product strategy', 'Data products', 'AI', 'SMB'],
+    type: 'case-study',
+    caseStudySlug: 'fleet-pattern-identification',
+  },
+  {
     title: 'Vernacular onboarding — opportunity or SUS?',
     period: '2018',
     summary:
