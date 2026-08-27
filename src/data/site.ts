@@ -56,6 +56,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Short video commerce — when discovery becomes the shopping experience',
+    period: '2026',
+    summary:
+      'Explored how short-form video changes where purchase intent comes from. When users don\'t arrive with a known need, the product must create demand through discovery — not just capture it.',
+    tags: ['Product strategy', 'Commerce', 'Discovery', 'Platform thinking'],
+    type: 'case-study',
+    caseStudySlug: 'short-video-commerce',
+  },
+  {
     title: 'Vernacular onboarding — opportunity or SUS?',
     period: '2018',
     summary:

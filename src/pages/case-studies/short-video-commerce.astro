@@ -1,0 +1,232 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const sections = [
+  { id: 'tldr', label: 'TL;DR' },
+  { id: 'context', label: 'Context' },
+  { id: 'shift', label: 'The Shift' },
+  { id: 'loop', label: 'The Product Loop' },
+  { id: 'tension', label: 'The Metrics Tension' },
+  { id: 'personalization', label: 'Personalization' },
+  { id: 'creators', label: 'Role of Creators' },
+  { id: 'reflection', label: 'Reflection' },
+];
+---
+
+<Base title="Short Video Commerce — When Discovery Becomes the Shopping Experience" description="A product thinking piece on how short-form video changes where purchase intent comes from and what that means for commerce.">
+  <article class="wrap section case-study">
+    <a href="/projects" class="meta back">← Back to Projects</a>
+
+    <header class="cs-hero">
+      <span class="cs-badge meta">📄 Case Study</span>
+      <h1>Short Video Commerce — When Discovery Becomes the Shopping Experience</h1>
+      <p class="cs-lede">What happens when purchase intent doesn't start with a search bar — it starts with a scroll.</p>
+    </header>
+
+    <div class="cs-grid">
+      <aside class="cs-sidebar">
+        <div class="cs-meta-card">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Year</span>
+            <span class="cs-meta-value">2026</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Role</span>
+            <span class="cs-meta-value">Product Thinker</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Domain</span>
+            <span class="cs-meta-value">Commerce · Discovery · Short Video</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Skills</span>
+            <ul class="cs-skill-list">
+              <li>Product Strategy</li>
+              <li>Commerce Design</li>
+              <li>Behavioral Analysis</li>
+              <li>Platform Thinking</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="cs-toc" aria-label="Case study sections">
+          <p class="cs-toc-title meta">On this page</p>
+          <ul class="cs-toc-list">
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="cs-toc-link" data-section={s.id}>{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="tldr">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">01</span>
+            <h2>TL;DR</h2>
+          </div>
+          <div class="cs-section-body">
+            <div class="cs-tldr-box">
+              <p>Traditional e-commerce captures existing demand — you know what you want and search for it. Short-form video commerce has the potential to <strong>create demand through discovery</strong>. Users don't arrive with purchase intent; they arrive for entertainment and stumble into products they didn't know they needed. This fundamentally changes what the product must do: instead of optimizing search and comparison, it must build a loop where content creates curiosity, curiosity creates consideration, and consideration creates commerce.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="context">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">02</span>
+            <h2>Context</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Traditional e-commerce is built around intent. You know what you want, you open an app, you search for it, compare a few options, make a decision, and complete the purchase. The entire experience is designed around helping you move from a known need to a transaction as efficiently as possible.</p>
+            <p>Short-form video introduces a completely different behavior. You don't necessarily open a short-video platform because you want to buy something. You open it because you want entertainment, inspiration, or simply something to fill five minutes. You scroll through one video, then another, and eventually you see something that catches your attention.</p>
+            <p>Maybe it's a product you have never heard of. Maybe it's something you didn't know existed. Maybe it solves a problem you didn't even realize you had. And suddenly, you have purchase intent.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="shift">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">03</span>
+            <h2>The Shift</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <blockquote class="cs-quote">Traditional e-commerce captures demand. Short-video commerce creates demand through discovery.</blockquote>
+            <p>That sounds subtle, but from a product perspective it changes the entire experience. If I'm searching for running shoes, the product needs to help me find the right running shoes. But if I'm watching videos and encounter a new type of running shoe that demonstrates a problem I didn't know existed, the product is doing something fundamentally different. It isn't helping me execute an existing decision. It is influencing the decision itself.</p>
+            <p>If search-based e-commerce is built around the assumption that customers know what they want, discovery-based commerce is built around the assumption that they don't.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="loop">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">04</span>
+            <h2>The Product Loop</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>This creates an interesting product loop: <strong>content creates curiosity, curiosity creates consideration, consideration creates intent, and intent creates commerce.</strong></p>
+            <p>But the challenge is that every part of this loop can break.</p>
+            <p>If the content isn't interesting, users leave. If the recommendation isn't relevant, discovery becomes noise. If the product demonstration isn't credible, curiosity doesn't turn into consideration. If the purchase journey is too complicated, intent disappears before the transaction happens.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="tension">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">05</span>
+            <h2>The Metrics Tension</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>This also creates an interesting tension around metrics. A short-video commerce platform could easily optimize itself into the wrong product. Watch time is attractive. Engagement is attractive. Session length is attractive. But none of those necessarily mean that the customer is getting closer to a valuable purchase.</p>
+            <p>A user can watch product videos for thirty minutes and buy nothing.</p>
+            <p>So the product needs to understand a more nuanced relationship between engagement and commercial intent. The question isn't simply whether users are watching. It is whether discovery is helping users find products that are genuinely relevant to them.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="personalization">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">06</span>
+            <h2>Personalization</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>That makes personalization especially important. A recommendation engine for commerce isn't necessarily trying to answer, "What video will this person watch next?" It is trying to answer a much harder question: <strong>"What product could this person genuinely find useful or interesting next?"</strong></p>
+            <p>And that distinction matters because the wrong recommendation can quickly make the experience feel like advertising. The product has to maintain a balance between discovery and trust. Users need to feel like they are discovering something valuable, not being pushed through an endless catalogue of sponsored products.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="creators">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">07</span>
+            <h2>Role of Creators</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>In traditional e-commerce, a product page is often the primary source of information. In short-video commerce, the creator becomes part of the product experience. They demonstrate the product, contextualize it, explain how they use it, and provide a form of social proof.</p>
+            <p>The boundary between content, marketing, review, and commerce starts to disappear.</p>
+            <p>That is what makes this opportunity compelling. The interesting question isn't whether we can put a "Buy Now" button on a video. That's easy. The interesting question is what happens when discovery itself becomes part of the commerce funnel.</p>
+          </div>
+        </section>
+
+        <section class="cs-section cs-section--highlight" id="reflection">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">✦</span>
+            <h2>Reflection</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p><strong>If search-based e-commerce is built around the assumption that customers know what they want, discovery-based commerce is built around the assumption that they don't.</strong></p>
+            <p>And if that assumption is right, we may not just be building a better way to shop.</p>
+            <p>We may be building a fundamentally different way for people to decide what they want to buy.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .back { display: inline-block; text-decoration: none; margin-bottom: 2rem; }
+
+    .cs-hero { padding-bottom: 2.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 3rem; }
+    .cs-badge { display: inline-block; padding: 0.3rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); margin-bottom: 1.2rem; font-size: 0.72rem; letter-spacing: 0.04em; }
+    .cs-hero h1 { max-width: 22ch; }
+    .cs-lede { margin-top: 1rem; font-size: 1.25rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.5; }
+
+    .cs-grid { display: grid; grid-template-columns: 15rem 1fr; gap: 4rem; }
+
+    .cs-sidebar { position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }
+    .cs-meta-card { border-top: 2px solid var(--accent); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .cs-meta-label { display: block; color: var(--ink-soft); margin-bottom: 0.3rem; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cs-meta-value { font-size: 0.92rem; }
+    .cs-skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.88rem; }
+
+    .cs-toc { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .cs-toc-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 0.6rem; }
+    .cs-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+    .cs-toc-link { display: block; padding: 0.35rem 0.7rem; font-size: 0.82rem; color: var(--ink-soft); text-decoration: none; border-left: 2px solid transparent; transition: color 0.15s ease, border-color 0.15s ease; }
+    .cs-toc-link:hover { color: var(--ink); }
+    .cs-toc-link.is-active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
+
+    .cs-section { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); scroll-margin-top: 5rem; }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-label { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .cs-section-num { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+    .cs-section-label h2 { font-size: 1.3rem; margin: 0; }
+    .cs-section-body p { margin-top: 1rem; max-width: 58ch; line-height: 1.75; }
+    .cs-section-body p:first-child { margin-top: 0; }
+
+    .cs-tldr-box { padding: 1.5rem; background: color-mix(in srgb, var(--ink) 4%, transparent); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+    .cs-tldr-box p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 58ch; }
+
+    .cs-quote { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.4; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 0 0 1.5rem 0; max-width: 36ch; }
+
+    .cs-section--highlight { background: color-mix(in srgb, var(--accent) 5%, transparent); padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .cs-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cs-sidebar { position: static; max-height: none; }
+      .cs-toc { display: none; }
+    }
+  </style>
+
+  <script>
+    function initScrollspy() {
+      const links = document.querySelectorAll('.cs-toc-link');
+      const sectionIds = Array.from(links).map(l => l.getAttribute('data-section'));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            const active = document.querySelector(`.cs-toc-link[data-section="${entry.target.id}"]`);
+            if (active) active.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    }
+    initScrollspy();
+    document.addEventListener('astro:page-load', initScrollspy);
+  </script>
+</Base>
