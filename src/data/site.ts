@@ -56,6 +56,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Work management — when a document becomes a workflow',
+    period: '2024 — Present',
+    summary:
+      'Shifting from document management to work management at Progress ShareFile. The real work isn\'t managing the file — it\'s completing the workflow around it. Designing for outcomes, not objects.',
+    tags: ['Product strategy', 'Enterprise', 'Workflow design', 'Systems thinking'],
+    type: 'case-study',
+    caseStudySlug: 'work-management',
+  },
+  {
     title: 'Short video commerce — when discovery becomes the shopping experience',
     period: '2021',
     summary:
