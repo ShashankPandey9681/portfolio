@@ -30,7 +30,7 @@ const stamp = post.data.date.toLocaleDateString('en-US', {
     <a href="/blog" class="meta back">← Blog</a>
     <div class="post__meta">
       <time class="meta" datetime={post.data.date.toISOString()}>{stamp}</time>
-      <a href={`/blog/category/${cat.slug}`} class="tag">{cat.label}</a>
+      <a href={`/blog?category=${cat.slug}`} class="tag">{cat.label}</a>
       <span class="meta post__words">{words.toLocaleString()} words</span>
     </div>
     <h1 class="post__title">{post.data.title}</h1>

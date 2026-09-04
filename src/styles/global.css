@@ -192,6 +192,10 @@ a.tag:hover {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+/* Filtering relies on the hidden attribute; make sure nothing overrides it. */
+[hidden] {
+  display: none !important;
+}
 
 /* ── Prose (blog post body) ───────────────────────────────────────────────── */
 .content h2 {

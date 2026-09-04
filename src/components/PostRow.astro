@@ -19,7 +19,7 @@ const stamp = date.toLocaleDateString('en-US', {
 });
 ---
 
-<article class="row" style={`--cat:${cat.color}`}>
+<article class="row" style={`--cat:${cat.color}`} data-category={category}>
   <a href={href} class="row__link">
     <div class="row__meta">
       <time class="meta" datetime={date.toISOString()}>{stamp}</time>

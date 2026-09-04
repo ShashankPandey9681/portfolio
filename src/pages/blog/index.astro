@@ -6,6 +6,13 @@ import { roundedWordCount } from '../../lib/wordCount';
 import { getPosts } from '../../lib/posts';
 
 const posts = await getPosts();
+
+// Per-category counts, so empty categories can be dimmed rather than lead to a
+// dead end.
+const counts = new Map<string, number>();
+for (const p of posts) {
+  counts.set(p.data.category, (counts.get(p.data.category) ?? 0) + 1);
+}
 ---
 
 <Base title="Blog" description="Essays on product, AI, innovation, productivity, and life.">
@@ -16,14 +23,25 @@ const posts = await getPosts();
       Notes and essays. Filter by what you came for — or read the whole stream.
     </p>
 
-    <nav class="chips" aria-label="Filter by category">
-      <span class="chip is-active">All ({posts.length})</span>
+    <nav class="chips" aria-label="Filter by category" data-filters>
+      <a href="/blog" class="chip is-active" data-cat="all" aria-pressed="true">
+        All ({posts.length})
+      </a>
       {
-        categories.map((c) => (
-          <a href={`/blog/category/${c.slug}`} class="chip" style={`--cat:${c.color}`}>
-            {c.label}
-          </a>
-        ))
+        categories.map((c) => {
+          const n = counts.get(c.slug) ?? 0;
+          return (
+            <a
+              href={`/blog/category/${c.slug}`}
+              class:list={['chip', { 'is-empty': n === 0 }]}
+              style={`--cat:${c.color}`}
+              data-cat={c.slug}
+              aria-pressed="false"
+            >
+              {c.label} ({n})
+            </a>
+          );
+        })
       }
     </nav>
 
@@ -33,7 +51,7 @@ const posts = await getPosts();
           No posts yet. Add a Markdown file in <code>src/content/blog/</code>.
         </p>
       ) : (
-        <div class="rows">
+        <div class="rows" data-rows>
           {posts.map((p) => (
             <PostRow
               title={p.data.title}
@@ -48,6 +66,8 @@ const posts = await getPosts();
         </div>
       )
     }
+
+    <p class="meta empty" data-no-match hidden>No posts in this category yet.</p>
   </section>
 
   <style>
@@ -77,12 +97,64 @@ const posts = await getPosts();
       color: var(--cat, var(--ink));
     }
     .chip.is-active {
-      background: var(--ink);
+      background: var(--cat, var(--ink));
       color: var(--paper);
-      border-color: var(--ink);
+      border-color: var(--cat, var(--ink));
+    }
+    .chip.is-empty {
+      opacity: 0.45;
     }
     .empty {
       padding-block: 2rem;
     }
   </style>
+
+  <script>
+    // Category chips filter the list in place. The chips are real links to the
+    // standalone category pages, so this is pure progressive enhancement — with
+    // JS off they still navigate and work.
+    const nav = document.querySelector('[data-filters]');
+    const rows = document.querySelector('[data-rows]');
+    const noMatch = document.querySelector('[data-no-match]');
+
+    if (nav && rows) {
+      const chips = Array.from(nav.querySelectorAll('.chip'));
+      const posts = Array.from(rows.querySelectorAll('[data-category]'));
+
+      const apply = (cat) => {
+        let shown = 0;
+        for (const post of posts) {
+          const match = cat === 'all' || post.dataset.category === cat;
+          post.hidden = !match;
+          if (match) shown++;
+        }
+        for (const chip of chips) {
+          const active = chip.dataset.cat === cat;
+          chip.classList.toggle('is-active', active);
+          chip.setAttribute('aria-pressed', String(active));
+        }
+        if (noMatch) noMatch.hidden = shown > 0;
+        rows.hidden = shown === 0;
+      };
+
+      const fromUrl = () => new URLSearchParams(location.search).get('category') || 'all';
+
+      for (const chip of chips) {
+        chip.addEventListener('click', (e) => {
+          // Let modified clicks (new tab, middle click) behave normally.
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          const cat = chip.dataset.cat || 'all';
+          const url = cat === 'all' ? '/blog' : '/blog?category=' + cat;
+          history.pushState({ cat }, '', url);
+          apply(cat);
+        });
+      }
+
+      // Keep the back/forward buttons meaningful.
+      window.addEventListener('popstate', () => apply(fromUrl()));
+
+      apply(fromUrl());
+    }
+  </script>
 </Base>
