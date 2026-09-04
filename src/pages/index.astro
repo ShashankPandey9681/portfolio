@@ -29,7 +29,7 @@ const posts = (await getPosts()).slice(0, 4);
       {
         categories.map((c) => (
           <li>
-            <a href={`/blog/category/${c.slug}`} class="tag" style={`--cat:${c.color}`}>
+            <a href={`/blog?category=${c.slug}`} class="tag" style={`--cat:${c.color}`}>
               {c.label}
             </a>
           </li>

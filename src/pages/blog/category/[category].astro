@@ -24,7 +24,7 @@ const posts = await getPosts(category);
       {
         categories.map((c) => (
           <a
-            href={`/blog/category/${c.slug}`}
+            href={`/blog?category=${c.slug}`}
             class:list={['chip', { 'is-active': c.slug === category }]}
             style={`--cat:${c.color}`}
           >
