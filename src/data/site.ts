@@ -61,7 +61,7 @@ export const projects: Project[] = [
     summary:
       'A 5 AM Telegram message that tells our cook what to make today. Built with n8n and a Google Sheet, it reads inventory, past meals, and preferences — because "what should we cook?" is a decision problem, not an information problem.',
     tags: ['Side project', 'AI', 'n8n', 'Automation'],
-    type: 'personal',
+    type: 'case-study',
     caseStudySlug: 'personal-cook-bot',
   },
   {
