@@ -70,9 +70,9 @@ const isActive = (href: string) =>
       <div class="wrap site-foot__inner">
         <p class="meta">© {new Date().getFullYear()} {site.name}</p>
         <p class="site-foot__links">
-          {site.socials.linkedin && <a href={site.socials.linkedin}>LinkedIn</a>}
-          {site.socials.x && <a href={site.socials.x}>X</a>}
-          {site.socials.github && <a href={site.socials.github}>GitHub</a>}
+          {site.socials.linkedin && <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+          {site.socials.x && <a href={site.socials.x} target="_blank" rel="noopener noreferrer">X</a>}
+          {site.socials.github && <a href={site.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
           <a href="/contact">Get in touch</a>
         </p>
       </div>
