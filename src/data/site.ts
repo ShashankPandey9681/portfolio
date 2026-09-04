@@ -13,7 +13,7 @@ export const site = {
   // where you've worked, what you focus on). Keep it 2–4 sentences.
   intro:
     "Product guy by day. Curious about everything by default. I like turning messy problems into simple products, shipping things people actually love",
-  email: 'shashank@spandey.com',
+  email: 'me@spandey.com',
   // Social links — leave a value empty ('') to hide that link.
   socials: {
     linkedin: 'https://www.linkedin.com/in/shashankpandey16/',
@@ -144,24 +144,30 @@ export const work: Role[] = [
   // TODO: add roles before 2021 (incl. the 2018 vernacular onboarding work).
 ];
 
-// ── Skills ───────────────────────────────────────────────────────────────────
-export type SkillGroup = { area: string; items: string[] };
+// ── Skills & agents ──────────────────────────────────────────────────────────
+// Skills, agents, and command workflows published on GitHub. Add an entry here
+// and it appears on /skills automatically. Only link to PUBLIC repos — private
+// ones 404 for visitors.
+export type SkillKind = 'skill' | 'agent' | 'workflow';
 
-export const skills: SkillGroup[] = [
+export type SkillEntry = {
+  name: string;
+  kind: SkillKind;
+  summary: string;
+  repo: string;
+  tags: string[];
+  // Attribution, e.g. when the work builds on someone else's library.
+  note?: string;
+};
+
+export const skills: SkillEntry[] = [
   {
-    area: 'Product',
-    items: ['Roadmapping & prioritization', 'Discovery & user research', 'PRDs & specs', 'Go-to-market strategy', 'A/B testing & experimentation'],
-  },
-  {
-    area: 'AI & Data',
-    items: ['LLM-assisted workflows', 'Prompt engineering', 'SQL & data pipelines', 'Product analytics', 'AI tool prototyping'],
-  },
-  {
-    area: 'Craft',
-    items: ['Stakeholder alignment', 'Writing & storytelling', 'Systems thinking', 'Team leadership', 'Cross-functional collaboration'],
-  },
-  {
-    area: 'Tools',
-    items: ['Figma', 'Jira / Linear', 'Amplitude / Mixpanel', 'Notion', 'GitHub Copilot / Cursor'],
+    name: 'Product Manager Skills',
+    kind: 'skill',
+    summary:
+      'A library of battle-tested PM frameworks — discovery, prioritisation, pricing, competitive intel — written so an AI agent and the PM using it share the same foundation. 77 skills and 7 command workflows.',
+    repo: 'https://github.com/ShashankPandey9681/Skill-ProductManagement',
+    tags: ['Claude Code', 'Codex', 'Cursor', 'PM frameworks'],
+    note: 'Forked from deanpeters/Product-Manager-Skills',
   },
 ];
