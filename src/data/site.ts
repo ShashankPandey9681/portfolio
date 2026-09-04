@@ -56,6 +56,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'Personal cook bot — what should we cook next?',
+    period: '2026',
+    summary:
+      'A 5 AM Telegram message that tells our cook what to make today. Built with n8n and a Google Sheet, it reads inventory, past meals, and preferences — because "what should we cook?" is a decision problem, not an information problem.',
+    tags: ['Side project', 'AI', 'n8n', 'Automation'],
+    type: 'personal',
+    caseStudySlug: 'personal-cook-bot',
+  },
+  {
     title: 'Work management — when a document becomes a workflow',
     period: '2024 — Present',
     summary:
