@@ -27,8 +27,8 @@ const posts = (await getPosts()).slice(0, 4);
         src={homeImages[0].src}
         alt={homeImages[0].alt}
         class="hero-img"
-        width="1280"
-        height="720"
+        width="1000"
+        height="871"
         loading="eager"
         fetchpriority="high"
       />
@@ -170,13 +170,11 @@ const posts = (await getPosts()).slice(0, 4);
     .hero-media :global(.carousel) {
       margin-block: 0;
     }
+    /* Cut-out portrait: no frame or crop, it sits directly on the paper. */
     .hero-img {
       width: 100%;
       height: auto;
       display: block;
-      border: 1px solid var(--line);
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
     }
     @media (max-width: 860px) {
       .hero-grid {

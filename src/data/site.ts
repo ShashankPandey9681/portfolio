@@ -29,7 +29,7 @@ export const site = {
 // `src` is the path under public/ ; `alt` describes the image for accessibility.
 // Replace the placeholders below with your own (jpg / png / webp all fine).
 export const homeImages: { src: string; alt: string }[] = [
-  { src: '/images/shashank.jpg', alt: 'Shashank Pandey' },
+  { src: '/images/shashank.webp', alt: 'Shashank Pandey' },
 ];
 
 // Top navigation.
