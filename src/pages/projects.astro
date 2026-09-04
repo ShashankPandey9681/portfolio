@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { projects } from '../data/site';
 
 function projectHref(p: typeof projects[0]): string | undefined {
-  if (p.caseStudySlug) return `/case-studies/${p.caseStudySlug}`;
+  if (p.type === 'case-study' && p.caseStudySlug) return `/case-studies/${p.caseStudySlug}`;
   if (p.type === 'personal' && p.link) return p.link;
   if (p.type === 'external' && p.link) return p.link;
   return undefined;
@@ -28,8 +28,7 @@ const typeLabel: Record<string, string> = {
       {
         projects.map((p, i) => {
           const href = projectHref(p);
-          const isInternal = !!p.caseStudySlug;
-          const isExternal = !isInternal && (p.type === 'personal' || (p.type === 'external' && p.link));
+          const isExternal = p.type === 'personal' || (p.type === 'external' && p.link);
           return (
             <article class:list={['project', `project--${p.type}`]}>
               <div class="project__index meta">{String(i + 1).padStart(2, '0')}</div>
@@ -43,7 +42,7 @@ const typeLabel: Record<string, string> = {
                     <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined}>
                       {p.title}
                       {isExternal && <span class="project__ext">↗</span>}
-                      {isInternal && <span class="project__ext">→</span>}
+                      {p.type === 'case-study' && <span class="project__ext">→</span>}
                     </a>
                   ) : (
                     p.title
@@ -55,10 +54,10 @@ const typeLabel: Record<string, string> = {
                     <li class="meta project__tag">{t}</li>
                   ))}
                 </ul>
-                {isInternal && href && (
+                {p.type === 'case-study' && href && (
                   <a href={href} class="project__cta meta">Read case study →</a>
                 )}
-                {p.type === 'personal' && !isInternal && href && (
+                {p.type === 'personal' && href && (
                   <a href={href} class="project__cta meta" target="_blank" rel="noopener">View on GitHub ↗</a>
                 )}
               </div>
@@ -83,9 +82,6 @@ const typeLabel: Record<string, string> = {
       gap: 1rem;
       padding-block: 2rem;
       border-top: 1px solid var(--line);
-    }
-    .project--case-study {
-      border-top: 2px solid var(--accent);
     }
     .project__index {
       color: var(--accent);
