@@ -238,3 +238,73 @@ a.tag:hover {
   max-width: 100%;
   height: auto;
 }
+
+/* ── House-style prose devices ────────────────────────────────────────────────
+   These support a heading-free essay structure. See docs/blog-style-guide.md.  */
+
+/* Movement divider — replaces H2s in long essays. Written as `---` in Markdown. */
+.content hr {
+  border: 0;
+  margin-block: 3rem;
+  text-align: center;
+}
+.content hr::before {
+  content: '§';
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--line-strong);
+}
+
+/* Italic provenance line above the first paragraph.
+   <p class="provenance">This essay came out of a conversation with…</p> */
+.content .provenance {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+/* Contrast-pair pull quote — the house signature.
+   <p class="pullquote">First line.<br />Second line.</p> */
+.content .pullquote {
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-block: 2rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--cat, var(--accent));
+}
+
+/* A bolded ordinal marker standing alone acts as a sub-head without being one.
+   Written as `**First example.**` on its own line. */
+.content p > strong:only-child {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+/* Endnotes — GFM footnotes, written as [^1] in Markdown. Keeps hedges and
+   asides out of the main line so short-paragraph momentum survives. */
+.content .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.content .footnotes h2 {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0;
+}
+.content .footnotes li {
+  margin-block: 0.5rem;
+}
+.content sup a {
+  text-decoration: none;
+  font-size: 0.75em;
+  padding-inline: 0.15em;
+}

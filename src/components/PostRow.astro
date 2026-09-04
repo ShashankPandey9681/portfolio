@@ -7,8 +7,10 @@ interface Props {
   date: Date;
   category: string;
   href: string;
+  words?: number;
+  draft?: boolean;
 }
-const { title, description, date, category, href } = Astro.props;
+const { title, description, date, category, href, words, draft } = Astro.props;
 const cat = categoryBySlug(category);
 const stamp = date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -22,9 +24,10 @@ const stamp = date.toLocaleDateString('en-US', {
     <div class="row__meta">
       <time class="meta" datetime={date.toISOString()}>{stamp}</time>
       <span class="tag">{cat.label}</span>
+      {words ? <span class="meta row__words">{words.toLocaleString()} words</span> : null}
     </div>
     <div class="row__body">
-      <h3 class="row__title">{title}</h3>
+      <h3 class="row__title">{draft ? <span class="row__draft">Draft</span> : null}{title}</h3>
       <p class="row__desc">{description}</p>
     </div>
   </a>
@@ -60,6 +63,20 @@ const stamp = date.toLocaleDateString('en-US', {
       color: var(--ink-soft);
       font-size: 0.95rem;
       max-width: 46ch;
+    }
+    .row__words {
+      color: var(--ink-soft);
+    }
+    .row__draft {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.15rem 0.4rem;
+      margin-right: 0.6rem;
     }
     @media (max-width: 640px) {
       .row__link {

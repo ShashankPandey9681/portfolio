@@ -2,11 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import PostRow from '../../components/PostRow.astro';
 import { categories } from '../../data/categories';
-import { getCollection } from 'astro:content';
+import { roundedWordCount } from '../../lib/wordCount';
+import { getPosts } from '../../lib/posts';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+const posts = await getPosts();
 ---
 
 <Base title="Blog" description="Essays on product, AI, innovation, productivity, and life.">
@@ -42,6 +41,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
               date={p.data.date}
               category={p.data.category}
               href={`/blog/${p.slug}`}
+              words={roundedWordCount(p.body)}
+              draft={p.data.draft}
             />
           ))}
         </div>

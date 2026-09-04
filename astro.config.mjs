@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-// IMPORTANT: update `site` to your real domain once you buy it.
-// This is used for canonical URLs, sitemaps, and RSS.
+// Canonical URL for the site — used for sitemaps, RSS, and canonical tags.
 export default defineConfig({
   site: 'https://www.spandey.com',
   build: {

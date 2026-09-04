@@ -3,11 +3,9 @@ import Base from '../layouts/Base.astro';
 import PostRow from '../components/PostRow.astro';
 import { site, homeImages, projects } from '../data/site';
 import { categories } from '../data/categories';
-import { getCollection } from 'astro:content';
+import { getPosts } from '../lib/posts';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 4);
+const posts = (await getPosts()).slice(0, 4);
 ---
 
 <Base>
