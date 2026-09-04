@@ -1,8 +1,9 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import PostRow from '../../../components/PostRow.astro';
+import { roundedWordCount } from '../../../lib/wordCount';
+import { getPosts } from '../../../lib/posts';
 import { categories, categoryBySlug } from '../../../data/categories';
-import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   return categories.map((c) => ({ params: { category: c.slug } }));
@@ -10,9 +11,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const cat = categoryBySlug(category);
-const posts = (
-  await getCollection('blog', ({ data }) => !data.draft && data.category === category)
-).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getPosts(category);
 ---
 
 <Base title={cat.label} description={`Posts filed under ${cat.label}.`}>
@@ -47,6 +46,8 @@ const posts = (
               date={p.data.date}
               category={p.data.category}
               href={`/blog/${p.slug}`}
+              words={roundedWordCount(p.body)}
+              draft={p.data.draft}
             />
           ))}
         </div>
