@@ -17,7 +17,7 @@ export const site = {
   // Social links — leave a value empty ('') to hide that link.
   socials: {
     linkedin: 'https://www.linkedin.com/in/shashankpandey16/',
-    x: 'https://x.com/your-handle',
+    x: '',
     github: 'https://github.com/ShashankPandey9681',
   },
   // Your Formspree form ID (see DEPLOY.md → Contact form). e.g. 'xmyzabcd'
@@ -109,30 +109,6 @@ export const projects: Project[] = [
     type: 'personal',
     link: 'https://github.com/ShashankPandey9681/portfolio',
   },
-  {
-    title: 'Product analytics revamp',
-    period: '2024 — 2025',
-    summary:
-      'Redesigned the analytics pipeline to surface actionable insights instead of vanity metrics. Reduced time-to-insight from days to minutes and helped the team run 3x more experiments per quarter.',
-    tags: ['Product strategy', 'Analytics', 'Experimentation'],
-    type: 'external',
-  },
-  {
-    title: 'Customer onboarding reimagined',
-    period: '2023 — 2024',
-    summary:
-      'Led a cross-functional initiative to reduce onboarding drop-off. Ran discovery with churned users, shipped a progressive walkthrough, and improved day-7 activation by 40%.',
-    tags: ['0→1', 'Discovery', 'Growth'],
-    type: 'external',
-  },
-  {
-    title: 'Internal AI automation toolkit',
-    period: '2023',
-    summary:
-      'Introduced LLM-based workflows for repetitive ops tasks — ticket classification, release notes generation, and support summarization. Saved the team ~15 hours per week.',
-    tags: ['AI', 'Automation', 'Process'],
-    type: 'external',
-  },
 ];
 
 // ── Work history (also used on About / Resume preview) ───────────────────────
@@ -146,23 +122,26 @@ export type Role = {
 export const work: Role[] = [
   {
     period: '2024 — Present',
-    title: 'Senior Product Manager',
-    org: 'Tech Company',
+    title: 'Lead Product Manager',
+    org: 'Progress ShareFile',
     description:
-      'Owning product strategy for the platform team. Leading AI integration, experimentation infrastructure, and developer experience initiatives.',
+      'Leading the Work Management charter — shifting the product from document management to completing the workflows that surround a document: requests, reviews, approvals, and signatures.',
   },
   {
-    period: '2021 — 2024',
+    period: '2022 — 2023',
+    title: 'Senior Product Manager, New Business',
+    org: 'Loconav',
+    description:
+      'Built fleet intelligence for small businesses — turning raw telematics data into recurring patterns, financial impact, and recommended actions rather than another dashboard.',
+  },
+  {
+    period: '2021',
     title: 'Product Manager',
-    org: 'Growth Stage Startup',
-    description: 'Drove onboarding and activation metrics. Shipped analytics revamp and ran 100+ growth experiments across the funnel.',
+    org: 'Trell',
+    description:
+      'Worked on short-video commerce — where purchase intent is created through discovery rather than captured through search.',
   },
-  {
-    period: '2018 — 2021',
-    title: 'Associate Product Manager',
-    org: 'Enterprise SaaS',
-    description: 'Cut teeth on customer discovery, sprint planning, and stakeholder management. Shipped first feature solo within 3 months.',
-  },
+  // TODO: add roles before 2021 (incl. the 2018 vernacular onboarding work).
 ];
 
 // ── Skills ───────────────────────────────────────────────────────────────────
