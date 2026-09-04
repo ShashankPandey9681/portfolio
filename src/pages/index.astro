@@ -4,6 +4,7 @@ import PostRow from '../components/PostRow.astro';
 import { site, homeImages, projects } from '../data/site';
 import { categories } from '../data/categories';
 import { getPosts } from '../lib/posts';
+import { projectHref, isExternalProject } from '../lib/projects';
 
 const posts = (await getPosts()).slice(0, 4);
 ---
@@ -22,7 +23,15 @@ const posts = (await getPosts()).slice(0, 4);
     </div>
 
     <div class="hero-media">
-      <img src={homeImages[0].src} alt={homeImages[0].alt} class="hero-img" />
+      <img
+        src={homeImages[0].src}
+        alt={homeImages[0].alt}
+        class="hero-img"
+        width="1280"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
 
     <ul class="hero__cats" aria-label="What I write about">
@@ -75,13 +84,31 @@ const posts = (await getPosts()).slice(0, 4);
     </header>
     <div class="proj-grid">
       {
-        projects.slice(0, 3).map((proj) => (
-          <article class="proj">
-            <p class="meta">{proj.period}</p>
-            <h3>{proj.title}</h3>
-            <p class="proj__sum">{proj.summary}</p>
-          </article>
-        ))
+        projects.slice(0, 3).map((proj) => {
+          const href = projectHref(proj);
+          const isExternal = isExternalProject(proj);
+          return (
+            <article class:list={['proj', href && 'proj--linked']}>
+              <p class="meta">{proj.period}</p>
+              <h3>
+                {href ? (
+                  <a
+                    href={href}
+                    class="proj__link"
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {proj.title}
+                    <span class="proj__arrow" aria-hidden="true">{isExternal ? ' ↗' : ' →'}</span>
+                  </a>
+                ) : (
+                  proj.title
+                )}
+              </h3>
+              <p class="proj__sum">{proj.summary}</p>
+            </article>
+          );
+        })
       }
     </div>
   </section>
@@ -183,8 +210,40 @@ const posts = (await getPosts()).slice(0, 4);
       border-top: 2px solid var(--ink);
       padding-top: 1rem;
     }
+    .proj--linked {
+      position: relative;
+      transition: border-color 0.15s ease;
+    }
     .proj h3 {
       margin-top: 0.4rem;
+    }
+    .proj__link {
+      color: inherit;
+      text-decoration: none;
+    }
+    /* Stretch the title link over the whole card so the full block is clickable,
+       while keeping a single link for keyboard and screen-reader users. */
+    .proj__link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .proj__arrow {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .proj--linked:hover {
+      border-top-color: var(--accent);
+    }
+    .proj--linked:hover .proj__link {
+      color: var(--accent);
+    }
+    .proj--linked:hover .proj__arrow {
+      transform: translateX(0.15rem);
+    }
+    .proj__link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
     .proj__sum {
       color: var(--ink-soft);

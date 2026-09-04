@@ -1,13 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { projects } from '../data/site';
-
-function projectHref(p: typeof projects[0]): string | undefined {
-  if (p.type === 'case-study' && p.caseStudySlug) return `/case-studies/${p.caseStudySlug}`;
-  if (p.type === 'personal' && p.link) return p.link;
-  if (p.type === 'external' && p.link) return p.link;
-  return undefined;
-}
+import { projectHref, isExternalProject } from '../lib/projects';
 
 const typeLabel: Record<string, string> = {
   'case-study': '📄 Case Study',
@@ -28,7 +22,7 @@ const typeLabel: Record<string, string> = {
       {
         projects.map((p, i) => {
           const href = projectHref(p);
-          const isExternal = p.type === 'personal' || (p.type === 'external' && p.link);
+          const isExternal = isExternalProject(p);
           return (
             <article class:list={['project', `project--${p.type}`]}>
               <div class="project__index meta">{String(i + 1).padStart(2, '0')}</div>
