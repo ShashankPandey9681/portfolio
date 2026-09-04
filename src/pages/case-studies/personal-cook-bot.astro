@@ -1,0 +1,239 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const sections = [
+  { id: 'tldr', label: 'TL;DR' },
+  { id: 'context', label: 'Context' },
+  { id: 'problem', label: 'The Real Problem' },
+  { id: 'build', label: 'What I Built' },
+  { id: 'stack', label: 'How It Works' },
+  { id: 'loop', label: 'The Feedback Loop' },
+  { id: 'ai-role', label: 'Where AI Actually Helps' },
+  { id: 'reflection', label: 'Reflection' },
+];
+---
+
+<Base title="Personal Cook Bot — What Should We Cook Next?" description="A side project using Telegram, n8n, and Google Sheets to remove a recurring household decision — an AI assistant that suggests what to cook based on context, not recipes.">
+  <article class="wrap section case-study">
+    <a href="/projects" class="meta back">← Back to Projects</a>
+
+    <header class="cs-hero">
+      <span class="cs-badge meta">🍳 Side Project</span>
+      <h1>Personal Cook Bot — What Should We Cook Next?</h1>
+      <p class="cs-lede">We don't need another thousand recipes. We need something that looks at the situation and decides.</p>
+    </header>
+
+    <div class="cs-grid">
+      <aside class="cs-sidebar">
+        <div class="cs-meta-card">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Year</span>
+            <span class="cs-meta-value">2026</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Role</span>
+            <span class="cs-meta-value">Builder — nights &amp; weekends</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Stack</span>
+            <span class="cs-meta-value">Telegram · n8n · Google Sheets · LLM</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label meta">Skills</span>
+            <ul class="cs-skill-list">
+              <li>AI Product Design</li>
+              <li>Context Engineering</li>
+              <li>Workflow Automation</li>
+              <li>Rapid Prototyping</li>
+            </ul>
+          </div>
+        </div>
+
+        <nav class="cs-toc" aria-label="Case study sections">
+          <p class="cs-toc-title meta">On this page</p>
+          <ul class="cs-toc-list">
+            {sections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} class="cs-toc-link" data-section={s.id}>{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="cs-content">
+
+        <section class="cs-section" id="tldr">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">01</span>
+            <h2>TL;DR</h2>
+          </div>
+          <div class="cs-section-body">
+            <div class="cs-tldr-box">
+              <p>Every day at 5 AM, a message lands in our household Telegram group telling the cook what to prepare — built with n8n, a Google Sheet, and an LLM. It reads inventory, past history, preferences, and likes/dislikes to make one confident recommendation. The insight: <strong>"what should we cook?" isn't an information problem, it's a decision problem.</strong> A generic model already knows thousands of recipes. What makes it useful is the context around the model, not the model itself.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cs-section" id="context">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">02</span>
+            <h2>Context</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Some of the most interesting product problems are the ones that sound almost too ordinary to be worth solving.</p>
+            <p>"What should we cook today?"</p>
+            <p>It is a question that happens in households constantly. It is also surprisingly difficult to answer well.</p>
+            <p>The obvious solution is a recipe app. Search for a dish, browse some recommendations, pick something, and start cooking. But I don't think recipes are really the problem.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="problem">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">03</span>
+            <h2>The Real Problem</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>The problem is the decision that happens <em>before</em> the recipe. What should we cook today given everything else that is happening in the household?</p>
+            <p>Maybe there are vegetables that need to be used. Maybe yesterday's dinner was heavy, so today should be lighter. Maybe someone doesn't like a particular ingredient. Maybe the cook only has thirty minutes. Maybe there are guests coming. Maybe we've eaten the same thing three times this week and nobody wants to eat it again.</p>
+            <blockquote class="cs-quote">The answer isn't sitting inside a recipe database. It sits inside context.</blockquote>
+          </div>
+        </section>
+
+        <section class="cs-section" id="build">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">04</span>
+            <h2>What I Built</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>Rather than creating another app where someone searches for recipes, I built an assistant that understands the household and tells the cook what to prepare next.</p>
+            <p>There's no app to open. Every morning at 5 AM, a message arrives in our family Telegram group — the place where household coordination already happens. No new tool, no new habit.</p>
+            <p>Instead of returning twenty recipes, the assistant says something like: <em>"Make vegetable pulao and raita today. You have rice and vegetables available, you haven't had it recently, and it can be prepared within the time you have."</em></p>
+            <p>That recommendation is useful because the system knows something about the people asking. It knows what is available. It remembers what was cooked recently. It understands preferences. It knows what the cook is comfortable preparing.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="stack">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">05</span>
+            <h2>How It Works</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>The whole thing runs on three pieces, deliberately kept boring:</p>
+            <p><strong>Google Sheets</strong> is the household memory — pantry inventory, what was cooked on which day, per-person likes and dislikes, and dishes the cook is confident making. A spreadsheet because anyone in the family can edit it without being taught anything.</p>
+            <p><strong>n8n</strong> is the orchestrator. A 5 AM cron trigger pulls the current state from the sheet, assembles it into context, calls the model, and formats the result into a short, readable message.</p>
+            <p><strong>Telegram</strong> is the interface. The recommendation is pushed into the group the household already uses, and replies in that same thread become feedback that writes back to the sheet.</p>
+            <p>None of these are impressive technologies. That's the point — the interesting engineering is in what goes <em>into</em> the prompt, not what runs it.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="loop">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">06</span>
+            <h2>The Feedback Loop</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>The system observes household context, makes a recommendation, gets feedback, and uses that feedback to improve the next recommendation.</p>
+            <p>If the cook says, "Everyone liked this, make it again next week," that's useful information. If they say, "Don't suggest this anymore," that's even more useful. If they say, "We have too much spinach. Use it tomorrow," the system now has another piece of context to incorporate.</p>
+            <p>Over time, the product becomes less like a recipe database and more like a <strong>household memory</strong>.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="ai-role">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">07</span>
+            <h2>Where AI Actually Helps</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p>A generic AI model already knows thousands of recipes. That isn't the difficult part. The difficult part is understanding the messy, constantly changing context of a real household.</p>
+            <blockquote class="cs-quote">The difference isn't the intelligence of the model. It's the quality of the context surrounding the model.</blockquote>
+            <p>It would be easy to add a chatbot to a meal-planning app and call it an AI cooking assistant. But the chatbot itself isn't the interesting part. The interesting part is removing a recurring decision from someone's day.</p>
+            <p>This project forced a question I keep coming back to in my day job: <strong>where does AI actually create a better product experience?</strong> Usually not by generating more options — by removing the need to choose between them.</p>
+          </div>
+        </section>
+
+        <section class="cs-section cs-section--highlight" id="reflection">
+          <div class="cs-section-label">
+            <span class="cs-section-num meta">✦</span>
+            <h2>Reflection</h2>
+          </div>
+          <div class="cs-section-body prose">
+            <p><strong>Many everyday problems aren't information problems. We already have plenty of information. They're decision problems.</strong></p>
+            <p>We don't need another thousand recipes. We need someone — or something — that can look at the situation and confidently say: "Given everything I know, this is probably the best thing to make tonight."</p>
+            <p>Not AI that generates more content.</p>
+            <p>AI that understands context well enough to make everyday decisions feel effortless.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <style>
+    .back { display: inline-block; text-decoration: none; margin-bottom: 2rem; }
+
+    .cs-hero { padding-bottom: 2.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 3rem; }
+    .cs-badge { display: inline-block; padding: 0.3rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); margin-bottom: 1.2rem; font-size: 0.72rem; letter-spacing: 0.04em; }
+    .cs-hero h1 { max-width: 22ch; }
+    .cs-lede { margin-top: 1rem; font-size: 1.25rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.5; }
+
+    .cs-grid { display: grid; grid-template-columns: 15rem 1fr; gap: 4rem; }
+
+    .cs-sidebar { position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }
+    .cs-meta-card { border-top: 2px solid var(--accent); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .cs-meta-label { display: block; color: var(--ink-soft); margin-bottom: 0.3rem; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .cs-meta-value { font-size: 0.92rem; }
+    .cs-skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.88rem; }
+
+    .cs-toc { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .cs-toc-title { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 0.6rem; }
+    .cs-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+    .cs-toc-link { display: block; padding: 0.35rem 0.7rem; font-size: 0.82rem; color: var(--ink-soft); text-decoration: none; border-left: 2px solid transparent; transition: color 0.15s ease, border-color 0.15s ease; }
+    .cs-toc-link:hover { color: var(--ink); }
+    .cs-toc-link.is-active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
+
+    .cs-section { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); scroll-margin-top: 5rem; }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-label { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .cs-section-num { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+    .cs-section-label h2 { font-size: 1.3rem; margin: 0; }
+    .cs-section-body p { margin-top: 1rem; max-width: 58ch; line-height: 1.75; }
+    .cs-section-body p:first-child { margin-top: 0; }
+
+    .cs-tldr-box { padding: 1.5rem; background: color-mix(in srgb, var(--ink) 4%, transparent); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+    .cs-tldr-box p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 58ch; }
+
+    .cs-quote { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.4; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 0 0 1.5rem 0; max-width: 36ch; }
+
+    .cs-section--highlight { background: color-mix(in srgb, var(--accent) 5%, transparent); padding: 2rem; border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .cs-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cs-sidebar { position: static; max-height: none; }
+      .cs-toc { display: none; }
+    }
+  </style>
+
+  <script>
+    function initScrollspy() {
+      const links = document.querySelectorAll('.cs-toc-link');
+      const sectionIds = Array.from(links).map(l => l.getAttribute('data-section'));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('is-active'));
+            const active = document.querySelector(`.cs-toc-link[data-section="${entry.target.id}"]`);
+            if (active) active.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    }
+    initScrollspy();
+    document.addEventListener('astro:page-load', initScrollspy);
+  </script>
+</Base>
