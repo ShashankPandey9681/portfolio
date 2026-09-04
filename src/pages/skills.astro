@@ -1,30 +1,53 @@
 ---
 import Base from '../layouts/Base.astro';
 import { skills } from '../data/site';
+
+const kindLabel: Record<string, string> = {
+  skill: '🧩 Skill',
+  agent: '🤖 Agent',
+  workflow: '⚙️ Workflow',
+};
 ---
 
-<Base title="Skills" description="How I work: product, AI, craft, and tools.">
+<Base
+  title="Skills & agents"
+  description="Skills, agents, and command workflows I build for AI coding tools — all open on GitHub."
+>
   <section class="wrap section">
-    <p class="eyebrow">Logbook · Capabilities</p>
-    <h1>Skills</h1>
+    <p class="eyebrow">Logbook · Skills &amp; agents</p>
+    <h1>Skills &amp; agents</h1>
     <p class="prose lede">
-      The shape of what I do, grouped by area. 
+      Skills, agents, and command workflows I build for AI tools and keep on GitHub. Each one
+      packages a way of working so an agent can reuse it — and so I stop explaining the same
+      thing twice.
     </p>
 
-    <div class="grid">
-      {
-        skills.map((group) => (
-          <section class="card">
-            <h2 class="card__title">{group.area}</h2>
-            <ul class="card__list">
-              {group.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </section>
-        ))
-      }
-    </div>
+    {
+      skills.length === 0 ? (
+        <p class="empty meta">Nothing published yet. Check back soon.</p>
+      ) : (
+        <div class="grid">
+          {skills.map((s) => (
+            <article class="card">
+              <p class="card__kind meta">{kindLabel[s.kind]}</p>
+              <h2 class="card__title">
+                <a href={s.repo} class="card__link" target="_blank" rel="noopener noreferrer">
+                  {s.name}
+                  <span class="card__ext" aria-hidden="true"> ↗</span>
+                </a>
+              </h2>
+              <p class="card__sum">{s.summary}</p>
+              <ul class="card__tags">
+                {s.tags.map((t) => (
+                  <li class="meta card__tag">{t}</li>
+                ))}
+              </ul>
+              {s.note && <p class="card__note meta">{s.note}</p>}
+            </article>
+          ))}
+        </div>
+      )
+    }
   </section>
 
   <style>
@@ -32,37 +55,78 @@ import { skills } from '../data/site';
       margin-top: 1rem;
       color: var(--ink-soft);
     }
+    .empty {
+      padding-block: 2rem;
+    }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
       gap: 1.5rem;
       margin-top: 2.5rem;
     }
     .card {
+      position: relative;
       border-top: 2px solid var(--ink);
       padding-top: 1rem;
+      transition: border-color 0.15s ease;
+    }
+    .card__kind {
+      letter-spacing: 0.04em;
     }
     .card__title {
       font-size: 1.3rem;
+      margin-top: 0.4rem;
     }
-    .card__list {
+    .card__link {
+      color: inherit;
+      text-decoration: none;
+    }
+    /* Stretch the title link over the card so the whole block is clickable,
+       while keeping one link for keyboard and screen-reader users. */
+    .card__link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .card__ext {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .card:hover {
+      border-top-color: var(--accent);
+    }
+    .card:hover .card__link {
+      color: var(--accent);
+    }
+    .card:hover .card__ext {
+      transform: translate(0.15rem, -0.15rem);
+    }
+    .card__link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .card__sum {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      margin-top: 0.6rem;
+    }
+    .card__tags {
       list-style: none;
       padding: 0;
-      margin: 1rem 0 0;
+      margin: 0.9rem 0 0;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.4rem;
     }
-    .card__list li {
-      padding-left: 1.1rem;
-      position: relative;
-      color: var(--ink-soft);
+    .card__tag {
+      border: 1px solid var(--line);
+      padding: 0.15rem 0.5rem;
+      font-size: 0.75rem;
     }
-    .card__list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
+    .card__note {
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      font-style: italic;
     }
   </style>
 </Base>
