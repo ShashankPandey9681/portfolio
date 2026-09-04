@@ -97,9 +97,9 @@ const posts = (await getPosts()).slice(0, 4);
     </p>
     <p class="touch__links">
       <a href={`mailto:${site.email}`}>{site.email}</a>
-      {site.socials.x && <a href={site.socials.x}>X</a>}
-      {site.socials.linkedin && <a href={site.socials.linkedin}>LinkedIn</a>}
-      {site.socials.github && <a href={site.socials.github}>GitHub</a>}
+      {site.socials.x && <a href={site.socials.x} target="_blank" rel="noopener noreferrer">X</a>}
+      {site.socials.linkedin && <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+      {site.socials.github && <a href={site.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
     </p>
   </section>
 
