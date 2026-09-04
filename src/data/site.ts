@@ -145,9 +145,14 @@ export const work: Role[] = [
 ];
 
 // ── Skills & agents ──────────────────────────────────────────────────────────
-// Skills, agents, and command workflows published on GitHub. Add an entry here
-// and it appears on /skills automatically. Only link to PUBLIC repos — private
-// ones 404 for visitors.
+// Skills, agents, and command workflows on GitHub. Add an entry here and it
+// appears on /skills automatically.
+//
+// Two rules:
+//   1. Only link PUBLIC repos — private ones 404 for visitors.
+//   2. Set origin: 'forked' for anything you didn't author, and name the
+//      original author in `upstream`. The page renders forks in a separate
+//      section so nobody else's work is presented as yours.
 export type SkillKind = 'skill' | 'agent' | 'workflow';
 
 export type SkillEntry = {
@@ -156,8 +161,9 @@ export type SkillEntry = {
   summary: string;
   repo: string;
   tags: string[];
-  // Attribution, e.g. when the work builds on someone else's library.
-  note?: string;
+  origin: 'built' | 'forked';
+  // Required when origin is 'forked': "owner/repo" of the original.
+  upstream?: string;
 };
 
 export const skills: SkillEntry[] = [
@@ -165,9 +171,10 @@ export const skills: SkillEntry[] = [
     name: 'Product Manager Skills',
     kind: 'skill',
     summary:
-      'A library of battle-tested PM frameworks — discovery, prioritisation, pricing, competitive intel — written so an AI agent and the PM using it share the same foundation. 77 skills and 7 command workflows.',
+      'A library of PM frameworks — discovery, prioritisation, pricing, competitive intel — written so an AI agent and the PM using it share the same foundation. I use this one heavily and adapt it to how I work.',
     repo: 'https://github.com/ShashankPandey9681/Skill-ProductManagement',
     tags: ['Claude Code', 'Codex', 'Cursor', 'PM frameworks'],
-    note: 'Forked from deanpeters/Product-Manager-Skills',
+    origin: 'forked',
+    upstream: 'deanpeters/Product-Manager-Skills',
   },
 ];

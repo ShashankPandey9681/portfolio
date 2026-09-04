@@ -7,45 +7,97 @@ const kindLabel: Record<string, string> = {
   agent: '🤖 Agent',
   workflow: '⚙️ Workflow',
 };
+
+const built = skills.filter((s) => s.origin === 'built');
+const forked = skills.filter((s) => s.origin === 'forked');
 ---
 
 <Base
   title="Skills & agents"
-  description="Skills, agents, and command workflows I build for AI coding tools — all open on GitHub."
+  description="Skills, agents, and command workflows I build for AI tools — plus the ones I've forked and adapted."
 >
   <section class="wrap section">
     <p class="eyebrow">Logbook · Skills &amp; agents</p>
     <h1>Skills &amp; agents</h1>
     <p class="prose lede">
-      Skills, agents, and command workflows I build for AI tools and keep on GitHub. Each one
-      packages a way of working so an agent can reuse it — and so I stop explaining the same
-      thing twice.
+      Skills, agents, and command workflows for AI tools. Each one packages a way of working so an
+      agent can reuse it. What I've built is separated from what I've forked — credit belongs where
+      it's due.
     </p>
 
+    <section class="group">
+      <header class="group__head">
+        <h2 class="group__title">Built by me</h2>
+        <p class="group__note meta">Written from scratch</p>
+      </header>
+      {
+        built.length === 0 ? (
+          <p class="empty meta">
+            Nothing public yet — the ones I'm working on live in private repos for now.
+          </p>
+        ) : (
+          <div class="grid">
+            {built.map((s) => (
+              <article class="card">
+                <p class="card__kind meta">{kindLabel[s.kind]}</p>
+                <h3 class="card__title">
+                  <a href={s.repo} class="card__link" target="_blank" rel="noopener noreferrer">
+                    {s.name}
+                    <span class="card__ext" aria-hidden="true"> ↗</span>
+                  </a>
+                </h3>
+                <p class="card__sum">{s.summary}</p>
+                <ul class="card__tags">
+                  {s.tags.map((t) => (
+                    <li class="meta card__tag">{t}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        )
+      }
+    </section>
+
     {
-      skills.length === 0 ? (
-        <p class="empty meta">Nothing published yet. Check back soon.</p>
-      ) : (
-        <div class="grid">
-          {skills.map((s) => (
-            <article class="card">
-              <p class="card__kind meta">{kindLabel[s.kind]}</p>
-              <h2 class="card__title">
-                <a href={s.repo} class="card__link" target="_blank" rel="noopener noreferrer">
-                  {s.name}
-                  <span class="card__ext" aria-hidden="true"> ↗</span>
-                </a>
-              </h2>
-              <p class="card__sum">{s.summary}</p>
-              <ul class="card__tags">
-                {s.tags.map((t) => (
-                  <li class="meta card__tag">{t}</li>
-                ))}
-              </ul>
-              {s.note && <p class="card__note meta">{s.note}</p>}
-            </article>
-          ))}
-        </div>
+      forked.length > 0 && (
+        <section class="group">
+          <header class="group__head">
+            <h2 class="group__title">Forked &amp; adapted</h2>
+            <p class="group__note meta">Other people's work that I use and build on — not mine</p>
+          </header>
+          <div class="grid">
+            {forked.map((s) => (
+              <article class="card card--forked">
+                <p class="card__kind meta">{kindLabel[s.kind]} · Fork</p>
+                <h3 class="card__title">
+                  <a href={s.repo} class="card__link" target="_blank" rel="noopener noreferrer">
+                    {s.name}
+                    <span class="card__ext" aria-hidden="true"> ↗</span>
+                  </a>
+                </h3>
+                {s.upstream && (
+                  <p class="card__credit meta">
+                    Original by{' '}
+                    <a
+                      href={`https://github.com/${s.upstream}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {s.upstream}
+                    </a>
+                  </p>
+                )}
+                <p class="card__sum">{s.summary}</p>
+                <ul class="card__tags">
+                  {s.tags.map((t) => (
+                    <li class="meta card__tag">{t}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
       )
     }
   </section>
@@ -55,14 +107,29 @@ const kindLabel: Record<string, string> = {
       margin-top: 1rem;
       color: var(--ink-soft);
     }
+    .group {
+      margin-top: 3rem;
+    }
+    .group__head {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.6rem;
+    }
+    .group__title {
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .group__note {
+      margin-top: 0.25rem;
+    }
     .empty {
-      padding-block: 2rem;
+      padding-block: 1.5rem;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
       gap: 1.5rem;
-      margin-top: 2.5rem;
+      margin-top: 1.5rem;
     }
     .card {
       position: relative;
@@ -70,11 +137,15 @@ const kindLabel: Record<string, string> = {
       padding-top: 1rem;
       transition: border-color 0.15s ease;
     }
+    /* Forks get a lighter rule so they read as secondary to my own work. */
+    .card--forked {
+      border-top: 1px solid var(--line);
+    }
     .card__kind {
       letter-spacing: 0.04em;
     }
     .card__title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       margin-top: 0.4rem;
     }
     .card__link {
@@ -105,6 +176,16 @@ const kindLabel: Record<string, string> = {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
+    /* Sits above the stretched link so the credit stays independently clickable. */
+    .card__credit {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.35rem;
+      font-style: italic;
+    }
+    .card__credit a {
+      color: inherit;
+    }
     .card__sum {
       color: var(--ink-soft);
       font-size: 0.95rem;
@@ -122,11 +203,6 @@ const kindLabel: Record<string, string> = {
       border: 1px solid var(--line);
       padding: 0.15rem 0.5rem;
       font-size: 0.75rem;
-    }
-    .card__note {
-      margin-top: 0.9rem;
-      font-size: 0.75rem;
-      font-style: italic;
     }
   </style>
 </Base>
