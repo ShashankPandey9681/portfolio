@@ -26,5 +26,5 @@ npm run dev      # http://localhost:4321
 
 ## Stack
 
-Astro · Cloudflare Pages (hosting + auto-deploy) · Formspree (contact form).
+Astro · GitHub Pages (hosting + auto-deploy) · Web3Forms (contact form).
 All free at personal scale.

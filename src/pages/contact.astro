@@ -2,62 +2,84 @@
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 
-const formAction = `https://formspree.io/f/${site.formspreeId}`;
-const configured = site.formspreeId && site.formspreeId !== 'YOUR_FORMSPREE_ID';
+// Web3Forms posts to its own endpoint and mails the verified address, so no
+// email ever appears in the markup. `redirect` is required for a no-JS form —
+// without it the visitor is shown raw JSON instead of a page.
+const configured = Boolean(site.web3formsKey);
+const thanksUrl = Astro.site
+  ? new URL('/thanks/', Astro.site).href
+  : 'https://www.spandey.com/thanks/';
 ---
 
-<Base title="Contact" description="Get in touch.">
+<Base title="Contact" description="Get in touch with Shashank Pandey.">
   <section class="wrap section contact">
     <p class="eyebrow">Logbook · Contact</p>
     <h1>Get in touch</h1>
     <p class="prose lede">
-      Fill this in and it lands in my inbox — no address exposed to scrapers.
-      Prefer social? Links are in the footer.
+      Say hello. A question, a disagreement with something I wrote, a problem
+      you are chewing on, or nothing in particular — all of it is welcome. I
+      read everything and reply to most of it.
     </p>
 
     {
-      !configured && (
-        <p class="notice meta">
-          Setup: add your Formspree form ID in <code>src/data/site.ts</code> to
-          activate this form. See DEPLOY.md.
-        </p>
+      configured && (
+        <form class="form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value={site.web3formsKey} />
+          <input type="hidden" name="subject" value="New message from spandey.com" />
+          <input type="hidden" name="from_name" value="spandey.com" />
+          <input type="hidden" name="redirect" value={thanksUrl} />
+
+          <label class="field">
+            <span class="field__label">Name</span>
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span class="field__label">Message</span>
+            <textarea name="message" rows="6" required></textarea>
+          </label>
+
+          {/* Honeypot: hidden from people, irresistible to bots. */}
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
+          <button type="submit" class="btn">Send message</button>
+        </form>
       )
     }
 
-    <form
-      class="form"
-      action={formAction}
-      method="POST"
-    >
-      <label class="field">
-        <span class="field__label">Name</span>
-        <input type="text" name="name" required autocomplete="name" />
-      </label>
-      <label class="field">
-        <span class="field__label">Email</span>
-        <input type="email" name="email" required autocomplete="email" />
-      </label>
-      <label class="field">
-        <span class="field__label">Message</span>
-        <textarea name="message" rows="6" required></textarea>
-      </label>
-      <button type="submit" class="btn" disabled={!configured}>
-        Send message
-      </button>
-    </form>
+    <div class="direct">
+      <p class="direct__label">Or reach me directly</p>
+      <ul class="direct__list">
+        <li>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        {
+          site.socials.linkedin && (
+            <li>
+              <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
   </section>
 
   <style>
     .lede {
       margin-top: 1rem;
       color: var(--ink-soft);
-    }
-    .notice {
-      margin-top: 1.5rem;
-      padding: 0.8rem 1rem;
-      border: 1px dashed var(--line-strong);
-      color: var(--ink-soft);
-      background: var(--paper-sunk);
     }
     .form {
       margin-top: 2rem;
@@ -97,9 +119,33 @@ const configured = site.formspreeId && site.formspreeId !== 'YOUR_FORMSPREE_ID';
     textarea {
       resize: vertical;
     }
-    .btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
+    .botcheck {
+      display: none !important;
+    }
+    .form .btn {
+      align-self: flex-start;
+    }
+    .direct {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      max-width: 34rem;
+    }
+    .direct__label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin: 0;
+    }
+    .direct__list {
+      list-style: none;
+      margin: 0.6rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
     }
   </style>
 </Base>
