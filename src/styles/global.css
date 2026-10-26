@@ -3,6 +3,8 @@
    Change the theme in one place. See ROADMAP.md → "Change the theme".
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
+  color-scheme: light dark;
+
   --paper: #faf7f1;
   --paper-sunk: #f3eee3;
   --ink: #17212b;
@@ -13,13 +15,52 @@
   --accent: #17715e;
   --accent-ink: #0e4c3f;
 
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  /* Code blocks invert against the page in light mode. */
+  --code-bg: #17212b;
+  --code-fg: #eae6dc;
+
+  /* One typeface everywhere. --font-label carries the small uppercase
+     metadata that used to be set in a monospace face; --font-mono is now
+     only used for actual code. */
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-label: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
   --wrap: 68rem;
   --wrap-prose: 40rem;
   --step: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────────────────
+   Follows the visitor's OS setting; there is no toggle. Only the tokens
+   change — every rule below reads from them. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1216;
+    --paper-sunk: #161a20;
+    --ink: #e7eaee;
+    --ink-soft: #a6afb9;
+    --ink-faint: #78828d;
+    --line: #242a32;
+    --line-strong: #39414c;
+    --accent: #4fd1ab;
+    --accent-ink: #7fe0c4;
+
+    --code-bg: #161a20;
+    --code-fg: #e7eaee;
+  }
+}
+
+/* Category colours arrive as an inline --cat on the article. They are mid-dark
+   by design, so on a dark page they are mixed toward white before use. */
+* {
+  --cat-fg: var(--cat, var(--accent));
+}
+@media (prefers-color-scheme: dark) {
+  * {
+    --cat-fg: color-mix(in srgb, var(--cat, var(--accent)) 55%, white);
+  }
 }
 
 *,
@@ -58,9 +99,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 460;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   margin: 0;
   color: var(--ink);
 }
@@ -86,7 +127,7 @@ a:hover {
 
 /* The logbook rail: monospace metadata used everywhere. */
 .meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -94,7 +135,7 @@ a:hover {
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -125,11 +166,11 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--cat, var(--accent));
+  color: var(--cat-fg);
   text-decoration: none;
 }
 .tag::before {
@@ -137,11 +178,11 @@ a:hover {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--cat, var(--accent));
+  background: var(--cat-fg);
 }
 a.tag:hover {
   text-decoration: underline;
-  text-decoration-color: var(--cat, var(--accent));
+  text-decoration-color: var(--cat-fg);
 }
 
 /* ── Buttons ──────────────────────────────────────────────────────────────── */
@@ -149,7 +190,7 @@ a.tag:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   padding: 0.7rem 1.15rem;
@@ -226,8 +267,8 @@ a.tag:hover {
   border: 1px solid var(--line);
 }
 .content pre {
-  background: var(--ink);
-  color: #eae6dc;
+  background: var(--code-bg);
+  color: var(--code-fg);
   padding: 1.1rem;
   overflow-x: auto;
   font-size: 0.85rem;
@@ -254,7 +295,7 @@ a.tag:hover {
 }
 .content hr::before {
   content: '§';
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.8rem;
   color: var(--line-strong);
 }
@@ -277,7 +318,7 @@ a.tag:hover {
   color: var(--ink);
   margin-block: 2rem;
   padding-left: 1.1rem;
-  border-left: 2px solid var(--cat, var(--accent));
+  border-left: 2px solid var(--cat-fg);
 }
 
 /* A bolded ordinal marker standing alone acts as a sub-head without being one.
@@ -298,7 +339,7 @@ a.tag:hover {
 }
 .content .footnotes h2 {
   font-size: 0.72rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-soft);
