@@ -3,7 +3,7 @@
    Change the theme in one place. See ROADMAP.md → "Change the theme".
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   --paper: #faf7f1;
   --paper-sunk: #f3eee3;
@@ -33,23 +33,24 @@
 }
 
 /* ── Dark mode ──────────────────────────────────────────────────────────────
-   Follows the visitor's OS setting; there is no toggle. Only the tokens
-   change — every rule below reads from them. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0f1216;
-    --paper-sunk: #161a20;
-    --ink: #e7eaee;
-    --ink-soft: #a6afb9;
-    --ink-faint: #78828d;
-    --line: #242a32;
-    --line-strong: #39414c;
-    --accent: #4fd1ab;
-    --accent-ink: #7fe0c4;
+   Opt-in, not automatic. Light is the default for every visitor; the header
+   toggle writes data-theme="dark" on <html> and remembers the choice in
+   localStorage. Only the tokens change — every rule below reads from them. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
-    --code-bg: #161a20;
-    --code-fg: #e7eaee;
-  }
+  --paper: #0f1216;
+  --paper-sunk: #161a20;
+  --ink: #e7eaee;
+  --ink-soft: #a6afb9;
+  --ink-faint: #78828d;
+  --line: #242a32;
+  --line-strong: #39414c;
+  --accent: #4fd1ab;
+  --accent-ink: #7fe0c4;
+
+  --code-bg: #161a20;
+  --code-fg: #e7eaee;
 }
 
 /* Category colours arrive as an inline --cat on the article. They are mid-dark
@@ -57,10 +58,8 @@
 * {
   --cat-fg: var(--cat, var(--accent));
 }
-@media (prefers-color-scheme: dark) {
-  * {
-    --cat-fg: color-mix(in srgb, var(--cat, var(--accent)) 55%, white);
-  }
+[data-theme='dark'] * {
+  --cat-fg: color-mix(in srgb, var(--cat, var(--accent)) 55%, white);
 }
 
 *,

@@ -77,15 +77,20 @@ The four font variables:
 | `--font-label`   | Small uppercase metadata — `.meta`, `.eyebrow`, `.tag`, `.btn` |
 | `--font-mono`    | Code only (`code` / `pre`)                      |
 
-**Dark mode** follows the visitor's OS setting (`prefers-color-scheme`) and has no
-toggle. It is defined entirely as token overrides in the `@media (prefers-color-scheme: dark)`
-block right below `:root` — so any rule that reads from a variable adapts for free.
-Two things to remember when adding styles:
+**Dark mode** is opt-in, not automatic. Light is the default for every visitor;
+the toggle in the site header sets `data-theme="dark"` on `<html>` and remembers
+the choice in `localStorage` under the key `theme`. A small inline script in
+`src/layouts/Base.astro` restores it before first paint so there is no flash.
+The theme itself is defined entirely as token overrides in the
+`:root[data-theme='dark']` block right below `:root` — so any rule that reads
+from a variable adapts for free. Three things to remember when adding styles:
 
 - Never hardcode a hex value; use a token, or it will break in one of the modes.
 - Category colors arrive as an inline `--cat` and are too dark for a dark
   background, so use `var(--cat-fg)` for text and borders. Raw `var(--cat)` is
   fine for a saturated fill behind white text.
+- Do not add a `prefers-color-scheme` media query. The OS setting is
+  deliberately ignored so the default stays light until the visitor opts in.
 
 ---
 
