@@ -20,8 +20,10 @@ export const site = {
     x: '',
     github: 'https://github.com/ShashankPandey9681',
   },
-  // Your Formspree form ID (see DEPLOY.md → Contact form). e.g. 'xmyzabcd'
-  formspreeId: 'YOUR_FORMSPREE_ID',
+  // Web3Forms access key (see DEPLOY.md → Contact form). This is a public
+  // client-side key by design — it only permits delivery to the verified
+  // address above, so it is safe to commit.
+  web3formsKey: '671cbd0c-b576-484a-8447-7072cffcc93d',
 };
 
 // ── Home carousel images ─────────────────────────────────────────────────────

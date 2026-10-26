@@ -5,8 +5,9 @@ import { site, nav } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
 const pageDesc = description ?? site.tagline;
 const path = Astro.url.pathname;
@@ -24,6 +25,7 @@ const isActive = (href: string) =>
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={canonical} />

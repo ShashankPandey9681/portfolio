@@ -1,7 +1,7 @@
 # DEPLOY — go from this folder to a live site
 
 Stack: **Astro** (static) -> **Cloudflare Pages** (hosting + auto-deploy) ->
-**Formspree** (contact form). All free at your scale. The build runs on
+**Web3Forms** (contact form). All free at your scale. The build runs on
 Cloudflare's servers, so you don't need npm working on your own machine to ship.
 
 ---
@@ -20,13 +20,22 @@ git remote add origin https://github.com/YOUR_USERNAME/personal-site.git
 git push -u origin main
 ```
 
-## 2. Wire up the contact form (Formspree)
+## 2. Wire up the contact form (Web3Forms)
 
-1. Sign up at <https://formspree.io> and create a new form.
-2. Copy the form ID from its endpoint `https://formspree.io/f/XXXXXXX` -> the ID is `XXXXXXX`.
-3. Paste it into `src/data/site.ts` -> `formspreeId`.
-4. Commit and push. The form on `/contact` now emails you on submit — no backend,
+1. Go to <https://web3forms.com>, enter the address you want messages delivered
+   to, and verify it. You get an **access key** back.
+2. Paste it into `src/data/site.ts` -> `web3formsKey`.
+3. Commit and push. The form on `/contact` now emails you on submit — no backend,
    and your address is never exposed in the HTML.
+
+The access key is **public by design**: it only permits delivery to the address
+you verified, so committing it is safe. Two details worth keeping if you edit
+the form:
+
+- The hidden `redirect` field is **required**. Without it, a visitor with
+  JavaScript disabled sees raw JSON instead of the `/thanks` page.
+- The hidden `botcheck` checkbox is a honeypot. People never see it; bots tick
+  it and get silently dropped. Keep it hidden and keep it last.
 
 ## 3. Deploy on Cloudflare Pages
 

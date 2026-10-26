@@ -15,7 +15,7 @@ file to open.
 | Social links (LinkedIn, X, etc.) | `src/data/site.ts`      | `site.socials`      |
 | The nav bar links / order        | `src/data/site.ts`      | the `nav` array     |
 | Home carousel images             | `public/images/` + `src/data/site.ts` | drop files in, list them in `homeImages` |
-| Contact form destination         | `src/data/site.ts`      | `site.formspreeId`  |
+| Contact form destination         | `src/data/site.ts`      | `site.web3formsKey` |
 | Site domain (for SEO/canonical)  | `astro.config.mjs`      | the `site:` value   |
 | Favicon                          | `public/favicon.svg`    | the SVG             |
 
