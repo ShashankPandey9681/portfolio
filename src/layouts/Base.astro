@@ -30,10 +30,14 @@ const isActive = (href: string) =>
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
 
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf7f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -119,7 +123,7 @@ const isActive = (href: string) =>
         align-items: center;
       }
       .site-nav__link {
-        font-family: var(--font-mono);
+        font-family: var(--font-label);
         font-size: 0.74rem;
         letter-spacing: 0.04em;
         text-transform: uppercase;
@@ -149,7 +153,7 @@ const isActive = (href: string) =>
       .site-foot__links {
         display: flex;
         gap: 1.1rem;
-        font-family: var(--font-mono);
+        font-family: var(--font-label);
         font-size: 0.74rem;
         text-transform: uppercase;
         letter-spacing: 0.04em;

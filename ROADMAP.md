@@ -65,9 +65,27 @@ The filename becomes the URL: `my-post.md` -> `/blog/my-post`.
 
 Everything visual is controlled by CSS variables at the top of
 `src/styles/global.css` (the `:root` block): paper, ink, accent, borders, and the
-three fonts (`--font-display`, `--font-body`, `--font-mono`). Change a value once
-and it updates everywhere. To swap fonts, also update the Google Fonts `<link>` in
-`src/layouts/Base.astro`.
+font stacks. Change a value once and it updates everywhere. To swap fonts, also
+update the Google Fonts `<link>` in `src/layouts/Base.astro`.
+
+The four font variables:
+
+| Variable         | Used for                                        |
+| ---------------- | ----------------------------------------------- |
+| `--font-display` | Headings (h1–h4)                                |
+| `--font-body`    | Body copy                                       |
+| `--font-label`   | Small uppercase metadata — `.meta`, `.eyebrow`, `.tag`, `.btn` |
+| `--font-mono`    | Code only (`code` / `pre`)                      |
+
+**Dark mode** follows the visitor's OS setting (`prefers-color-scheme`) and has no
+toggle. It is defined entirely as token overrides in the `@media (prefers-color-scheme: dark)`
+block right below `:root` — so any rule that reads from a variable adapts for free.
+Two things to remember when adding styles:
+
+- Never hardcode a hex value; use a token, or it will break in one of the modes.
+- Category colors arrive as an inline `--cat` and are too dark for a dark
+  background, so use `var(--cat-fg)` for text and borders. Raw `var(--cat)` is
+  fine for a saturated fill behind white text.
 
 ---
 
